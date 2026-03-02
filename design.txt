@@ -1,0 +1,22 @@
+Brain Storm:
+
+Count down (optional) 
+Size of vehicle 
+Seats Per row 
+Number of vehicles 
+Interval 
+Lap sitting?
+Number of visible guests 
+Preload area
+Single rider line 
+Deactivate seat/row/vehicle 
+Even/Odd Lines
+
+All guests are gray until tapped (activated) 
+“Call for #” button
+The whole group changes to that color 
+6 different colors, then repeat
+Group size based on dining frequency 
+Enter in info first, then game is built 
+Or prebuilt and you choose the location 
+Or Both 

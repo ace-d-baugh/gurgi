@@ -1,0 +1,604 @@
+Database Entries
+Rides: Magic Kingdom
+Astro Orbiter
+ID: auto
+Name: Astro Orbiter
+Slug: astro-orbiter
+Location: Magic Kingdom
+Type: Stop and Go Single Vehicle
+Guests: {2,2,2,2,2,2,2,2,2,2,2,2}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+Barnstormer
+ID: auto
+Name: Barnstormer
+Slug: barnstormer
+Location: Magic Kingdom
+Type: Interval Batch Loader
+Guests: {2,2,2,2,2,2,2,2}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: True
+Active: True
+Big Thunder Mountain
+ID: auto
+Name: Big Thunder Mountain
+Slug: big-thunder-mountain
+Location: Magic Kingdom
+Type: Interval Batch Loader
+Guests: {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: True
+Active: True
+Buzz Lightyear’s Space Ranger Spin
+ID: auto
+Name: Buzz Lightyear’s Space Ranger Spin
+Slug: buzz-lightyears-space-ranger-spin
+Location: Magic Kingdom
+Type: Continuous Mover
+Guests: {2}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+Dumbo
+ID: auto
+Name: Dumbo
+Slug: dumbo
+Location: Magic Kingdom
+Type: Stop and Go Single Vehicle
+Guests: {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+it’s a small world
+ID: auto
+Name: it’s a small world
+Slug: its-a-small-world
+Location: Magic Kingdom
+Type: Interval Batch Loader
+Guests: {4,4,4,4,4,3}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: True
+Active: True
+Jungle Cruise: Port
+ID: auto
+Name: Jungle Cruise Port
+Slug: jungle-cruise-port
+Location: Magic Kingdom
+Type: Interval Batch Loader
+Guests: {14}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+Jungle Cruise: Starboard
+ID: auto
+Name: Jungle Cruise Starboard
+Slug: jungle-cruise-starboard
+Location: Magic Kingdom
+Type: Interval Batch Loader
+Guests: {16}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+Mad Tea Party
+ID: auto
+Name: Mad Tea Party
+Slug: mad-tea-party
+Location: Magic Kingdom
+Type: Stop and Go Single Vehicle
+Guests: {4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+
+Magic Carpets of Aladdin
+ID: auto
+Name: Magic Carpets of Aladdin
+Slug: magic-carpets-of-aladdin
+Location: Magic Kingdom
+Type: Stop and Go Single Vehicle
+Guests: {4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+
+Many Adventures of Winnie the Pooh
+ID: auto
+Name: Many Adventures of Winnie the Pooh
+Slug: many-adventures-of-winnie-the-pooh
+Location: Magic Kingdom
+Type: Interval Batch Loader
+Guests: 
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: True
+Active: True
+Peter Pan’s Flight
+ID: auto
+Name: Peter Pan’s Flight
+Slug: peter-pans-flight
+Location: Magic Kingdom
+Type: Continuous Mover
+Guests: {3}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+Pirates of the Caribbean
+ID: auto
+Name: Pirates of the Caribbean
+Slug: pirates-of-the-caribbean
+Location: Magic Kingdom
+Type: Interval Batch Loader
+Guests: {4,4,4,4,4,3}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: True
+Active: True
+Prince Charming Regal Carrousel
+ID: auto
+Name: Prince Charming Regal Carrousel
+Slug: prince-charming-regal-carrousel
+Location: Magic Kingdom
+Type: Corral Counter
+Guests: {90}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+Seven Dwarfs Mine Train
+ID: auto
+Name: Seven Dwarfs Mine Train
+Slug: seven-dwarfs-mine-train
+Location: Magic Kingdom
+Type: Interval Batch Loader
+Guests: {2,2,2,2,2,2,2,2,2,2}
+EvenOdd: True
+SingleRider: False
+RowRequest: True
+DoubleGroup: True
+Active: True
+Space Mountain
+ID: auto
+Name: Space Mountain
+Slug: space-mountain
+Location: Magic Kingdom
+Type: Interval Batch Loader
+Guests: {6,6}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: True
+Active: True
+Tiana’s Bayou Adventure
+ID: auto
+Name: Tiana’s Bayou Adventure
+Slug: tianas-bayou-adventure
+Location: Magic Kingdom
+Type: Interval Batch Loader
+Guests: {2,2,2,2,2,2,2,2,2,2,2,2}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: False
+Active: True
+Tomorrowland Speedway
+ID: auto
+Name: Tomorrowland Speedway
+Slug: tomorrowland-speedway
+Location: Magic Kingdom
+Type: Interval Batch Loader
+Guests: {2,2,2,2,2,2,2,2,2,2,2,2}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+Tomorrowland Transit Authority PeopleMover
+ID: auto
+Name: Tomorrowland Transit Authority PeopleMover
+Slug: tomorrowland-transit-authority-peoplemover
+Location: Magic Kingdom
+Type: Continuous Mover
+Guests: 
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+TRON Lightcycle / Run
+ID: auto
+Name: TRON Lightcycle / Run
+Slug: tron-lightcycle-run
+Location: Magic Kingdom
+Type: Interval Batch Loader
+Guests: {2,2,2,2,2,2,2}
+EvenOdd: True
+SingleRider: False
+RowRequest: True
+DoubleGroup: True
+Active: True
+Rides: EPCOT
+Frozen Ever After
+ID: auto
+Name: Frozen Ever After
+Slug: frozen-ever-after
+Location: EPCOT
+Type: Interval Batch Loader
+Guests: {4,4,4,4}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: True
+Active: True
+Gran Fiesta Tour
+ID: auto
+Name: Gran Fiesta Tour
+Slug: gran-fiesta-tour
+Location: EPCOT
+Type: Interval Batch Loader
+Guests: {4,4,4,4,3}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: True
+Active: True
+Guardians of the Galaxy: Cosmic Rewind
+ID: auto
+Name: Guardians of the Galaxy: Cosmic Rewind
+Slug: guardians-of-the-galaxy-cosmic-rewind
+Location: EPCOT
+Type: Interval Batch Loader
+Guests: {2,2,2,2,2,2,2,2,2,2}
+EvenOdd: True
+SingleRider: False
+RowRequest: True
+DoubleGroup: True
+Active: True
+Journey Into Imagination with Figment
+ID: auto
+Name: Journey Into Imagination with Figment
+Slug: journey-into-imagination-with-figment
+Location: EPCOT
+Type: Interval Batch Loader
+Guests: {3,4,3,4,3,4,3,4}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: True
+Active: True
+Living with the Land
+ID: auto
+Name: Living with the Land
+Slug: living-with-the-land
+Location: EPCOT
+Type: Interval Batch Loader
+Guests: {4,4,4,4,4,4,4,4,4,4}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: True
+Active: True
+Mission: SPACE
+ID: auto
+Name: Mission: SPACE
+Slug: mission-space
+Location: EPCOT
+Type: Multiple Interval Batch Loader
+Guests: {{4,4,4,4,4,4,4,4,4,4}{4,4,4,4,4,4,4,4,4,4}{4,4,4,4,4,4,4,4,4,4}{4,4,4,4,4,4,4,4,4,4}}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+Remy’s Ratatouille Adventure
+ID: auto
+Name: Remy’s Ratatouille Adventure
+Slug: remys-ratatouille-adventure
+Location: EPCOT
+Type: Multiple Interval Batch Loader
+Guests: {{3,3,3,3,3,3}{3,3,3,3,3,3}} ???
+EvenOdd: False
+SingleRider: True
+RowRequest: True
+DoubleGroup: True
+Active: True
+The Seas with Nemo and Friends
+ID: auto
+Name: The Seas with Nemo and Friends
+Slug: the-seas-with-nemo-and-friends
+Location: EPCOT
+Type: Continuous Mover
+Guests: {3}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+Soarin’ Wing
+ID: auto
+Name: Soarin’ Wing
+Slug: soarin-wing
+Location: EPCOT
+Type: Stop and Go Single Vehicle
+Guests: {10,10,7}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: False
+Active: True
+Soarin’ Middle
+ID: auto
+Name: Soarin’ Middle
+Slug: soarin-middle
+Location: EPCOT
+Type: Stop and Go Single Vehicle
+Guests: {11,11,11}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: False
+Active: True
+Spaceship Earth
+ID: auto
+Name: Spaceship Earth
+Slug: spaceship-earth
+Location: EPCOT
+Type: Continuous Mover
+Guests: {2,2}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+Test Track
+ID: auto
+Name: Test Track
+Slug: test-track
+Location: EPCOT
+Type: Interval Batch Loader
+Guests: {3,3,3,3,3,3,3,3}
+EvenOdd: False
+SingleRider: True
+RowRequest: True
+DoubleGroup: True
+Active: True
+Rides: Disney’s Hollywood Studios
+Alien Swirling Saucers
+ID: auto
+Name: Alien Swirling Saucers
+Slug: alien-swirling-saucers
+Location: Disney’s Hollywood Studios
+Type: Multiple Stop and Go Single Vehicle
+Guests: {{3,3,3,3,3,3,3,3,3,3,3}{3,3,3,3,3,3,3,3,3,3,3}}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+Mickey and Minnie’s Runaway Railway
+ID: auto
+Name: Mickey and Minnie’s Runaway Railway
+Slug: mickey-and-minnies-runaway-railway
+Location: Disney’s Hollywood Studios
+Type: Interval Batch Loader
+Guests: {4,4,4,4,4,4,4,4}
+EvenOdd: False
+SingleRider: True
+RowRequest: True
+DoubleGroup: True
+Active: True
+Millennium Falcon: Smugglers Run
+ID: auto
+Name: Millennium Falcon: Smugglers Run
+Slug: millennium-falcon-smugglers-run
+Location: Disney’s Hollywood Studios
+Type: Interval Batch Loader
+Guests: {2,2,2}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: False
+Active: True
+Rockin’ Rollercoaster
+ID: auto
+Name: Rockin’ Rollercoaster
+Slug: rockin-rollercoaster
+Location: Disney’s Hollywood Studios
+Type: Interval Batch Loader
+Guests: {2,2,2,2,2,2,2,2,2,2,2,2}
+EvenOdd: False
+SingleRider: True
+RowRequest: True
+DoubleGroup: True
+Active: True
+Slinky Dog Dash
+ID: auto
+Name: Slinky Dog Dash
+Slug: slinky-dog-dash
+Location: Disney’s Hollywood Studios
+Type: Interval Batch Loader
+Guests: {2,2,2,2,2,2,2,2,2}
+EvenOdd: True
+SingleRider: False
+RowRequest: True
+DoubleGroup: True
+Active: True
+Star Tours
+ID: auto
+Name: Star Tours
+Slug: star-tours
+Location: Disney’s Hollywood Studios
+Type: Stop and Go Single Vehicle
+Guests: {8,8,7,8,9}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: False
+Active: True
+Star Wars: Rise of the Resistance
+ID: auto
+Name: Star Wars: Rise of the Resistance
+Slug: star-wars-rise-of-the-resistance
+Location: Disney’s Hollywood Studios
+Type: Interval Batch Loader
+Guests: {4,4,4,4}
+EvenOdd: False
+SingleRider: True
+RowRequest: False
+DoubleGroup: False
+Active: True
+Toy Story Mania!
+ID: auto
+Name: Toy Story Mania!
+Slug: toy-story-mania
+Location: Disney’s Hollywood Studios
+Type: Interval Batch Loader
+Guests: {2,2,2,2,2,2,2,2}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: True
+Active: True
+The Twilight Zone Tower of Terror
+ID: auto
+Name: The Twilight Zone Tower of Terror
+Slug: the- twilight-zone-tower-of-terror
+Location: Disney’s Hollywood Studios
+Type: Multiple Interval Batch Loader
+Guests: {{3,4,3,4,3,4}{3,4,3,4,3,4}}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: False
+Active: True
+Rides: Disney’s Animal Kingdom
+Avatar Flight of Passage
+ID: auto
+Name: Avatar Flight of Passage
+Slug: avatar-flight-of-passage
+Location: Disney’s Animal Kingdom
+Type: Multiple Interval Batch Loader
+Guests: {{8,8}{8,8}{8,8}{8,8}}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+Dinosaur
+ID: auto
+Name: Dinosaur
+Slug: dinosaur
+Location: Disney’s Animal Kingdom
+Type: Multiple Batch Interval Loader
+Guests: {{4,4,4}{4,4,4}}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: True
+Active: False
+Expedition Everest
+ID: auto
+Name: Expedition Everest
+Slug: expedition-everest
+Location: Disney’s Animal Kingdom
+Type: Interval Batch Loader
+Guests: {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}
+EvenOdd: False
+SingleRider: True
+RowRequest: True
+DoubleGroup: True
+Active: True
+Indiana Jones
+ID: auto
+Name: Indiana Jones
+Slug: indiana-jones
+Location: Disney’s Animal Kingdom
+Type: Multiple Batch Interval Loader
+Guests: {{4,4,4}{4,4,4}}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: True
+Active: False
+Kali River Rapids
+ID: auto
+Name: Kali River Rapids
+Slug: kali-river-rapids
+Location: Disney’s Animal Kingdom
+Type: Continuous Mover
+Guests: {12}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+Kilimanjaro Safaris
+ID: auto
+Name: Kilimanjaro Safaris
+Slug: kilimanjaro-safaris
+Location: Disney’s Animal Kingdom
+Type: Interval Batch Loader
+Guests: {5,5,5,5,5,5,5,5,5}
+EvenOdd: False
+SingleRider: False
+RowRequest: True
+DoubleGroup: True
+Active: True
+Na’vi River Journey
+ID: auto
+Name: Na’vi River Journey
+Slug: navi-river-journey
+Location: Disney’s Animal Kingdom
+Type: Interval Batch Loader
+Guests: {4,4,4.4}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: True
+Active: True
+Locations
+Magic Kingdom
+ID: auto
+Name: Magic Kingdom
+Slug: magic-kingdom
+Active: true
+EPCOT
+ID: auto
+Name: EPCOT
+Slug: epcot
+Active: true
+Disney’s Hollywood Studios
+ID: auto
+Name: Disney’s Hollywood Studios
+Slug: disneys-hollywood-studios
+Active: true
+Disney’s Animal Kingdom
+ID: auto
+Name: Disney’s Animal Kingdom
+Slug: disneys-animal-kingdom
+Active: true
