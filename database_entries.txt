@@ -303,13 +303,25 @@ SingleRider: False
 RowRequest: True
 DoubleGroup: True
 Active: True
-Mission: SPACE
+Mission: SPACE Green
 ID: auto
-Name: Mission: SPACE
-Slug: mission-space
+Name: Mission: SPACE Green
+Slug: mission-space-green
 Location: EPCOT
 Type: Multiple Interval Batch Loader
-Guests: {{4,4,4,4,4,4,4,4,4,4}{4,4,4,4,4,4,4,4,4,4}{4,4,4,4,4,4,4,4,4,4}{4,4,4,4,4,4,4,4,4,4}}
+Guests: {{4,4,4,4,4,4,4,4,4,4}{4,4,4,4,4,4,4,4,4,4}}
+EvenOdd: False
+SingleRider: False
+RowRequest: False
+DoubleGroup: False
+Active: True
+Mission: SPACE Orange
+ID: auto
+Name: Mission: SPACE Orange
+Slug: mission-space-orange
+Location: EPCOT
+Type: Multiple Interval Batch Loader
+Guests: {{4,4,4,4,4,4,4,4,4,4}{4,4,4,4,4,4,4,4,4,4}}
 EvenOdd: False
 SingleRider: False
 RowRequest: False
