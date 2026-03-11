@@ -1,13 +1,38 @@
-import dotenv from 'dotenv';
-dotenv.config({ path: require('path').join(__dirname, '..', '..', '.env') });
+import { config } from 'dotenv';
+import { join } from 'path';
 
-console.log('Loading .env from:', require('path').join(__dirname, '..', '..', '.env'));
+// Try multiple path strategies for cross-platform compatibility
+const possiblePaths = [
+ join(process.cwd(), '..', '..', '.env'),        // From server/src/scripts to root
+ join(process.cwd(), '.env'),                     // From server folder
+ '/a0/usr/projects/gurgi/.env',                 // Docker absolute path
+];
+
+let loaded = false;
+for (const envPath of possiblePaths) {
+ try {
+ const result = config({ path: envPath });
+ if (!result.error && process.env.MONGODB_URI) {
+ console.log('✅ Loaded .env from:', envPath);
+ loaded = true;
+ break;
+ }
+ } catch (e) {
+ // Continue to next path
+ }
+}
+
+if (!loaded) {
+ console.error('❌ Could not load .env from any location');
+ console.error('Tried:', possiblePaths.join(', '));
+}
+
 console.log('MONGODB_URI is:', process.env.MONGODB_URI ? 'SET ✓' : 'NOT SET ✗');
 
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import connectDB from '../config/database';
-import { Location, Ride, AdminUser, RideType } from '../models';
+import { Location, Ride, AdminUser } from '../models';
 
 const locations = [
  { name: 'Magic Kingdom', slug: 'magic-kingdom' },
@@ -46,7 +71,7 @@ const seedDatabase = async () => {
  await Location.deleteMany({});
  await AdminUser.deleteMany({});
 
- const locationMap = new Map<string, string>();
+ const locationMap: Map<string, string> = new Map();
  for (const loc of locations) {
  const created = await Location.create({ ...loc, active: true });
  locationMap.set(loc.slug, (created as any)._id.toString());
