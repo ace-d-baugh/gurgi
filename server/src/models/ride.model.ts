@@ -49,7 +49,7 @@ RideSchema.pre('save', function(next) {
  next();
 });
 
-RideSchema.index({ nameSlug: 1 });
-RideSchema.index({ active: 1, location: 1 });
+// Index defined via schema options
+// Compound index for queries
 
 export const Ride = mongoose.model<IRide>('Ride', RideSchema);
