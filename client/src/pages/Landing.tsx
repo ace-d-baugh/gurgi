@@ -16,18 +16,30 @@ export default function Landing() {
  const [rides, setRides] = useState<Ride[]>([]);
  const [selectedRide, setSelectedRide] = useState<Ride | null>(null);
  const [loading, setLoading] = useState(false);
+ const [error, setError] = useState('');
 
  useEffect(() => {
  if (selectedPark) {
  setLoading(true);
+ setError('');
  rideApi.getAll()
- .then(res => setRides(res.data.filter((r: Ride) => r.location.slug === selectedPark)))
+ .then(res => {
+ const parkRides = res.data.filter((r: Ride) => r.location?.slug === selectedPark);
+ setRides(parkRides);
+ if (parkRides.length === 0) {
+ setError('No rides found for this park');
+ }
+ })
+ .catch(err => {
+ setError('Failed to load rides');
+ console.error(err);
+ })
  .finally(() => setLoading(false));
  }
  }, [selectedPark]);
 
  const handleGo = () => {
- if (selectedRide) {
+ if (selectedRide && selectedPark) {
  navigate(`/${selectedPark}/${selectedRide.nameSlug}`);
  }
  };
@@ -52,6 +64,7 @@ export default function Landing() {
  onClick={() => {
  setSelectedPark(park.slug);
  setSelectedRide(null);
+ setRides([]);
  }}
  className={`flex flex-col items-center p-6 rounded-xl transition-all ${
  selectedPark === park.slug
@@ -60,7 +73,7 @@ export default function Landing() {
  }`}
  >
  <span className="text-4xl mb-2">{park.icon}</span>
- <span className="text-sm font-medium">{park.name}</span>
+ <span className="text-sm font-medium text-center">{park.name}</span>
  </button>
  ))}
  </div>
@@ -68,9 +81,15 @@ export default function Landing() {
  {selectedPark && (
  <div className="border-t border-white/20 pt-6">
  <h3 className="text-xl text-white mb-4">Select a Ride</h3>
+ 
+ {error && (
+ <div className="text-red-300 text-center mb-4">{error}</div>
+ )}
+ 
  {loading ? (
  <div className="text-center text-blue-200">Loading rides...</div>
- ) : (
+ ) : rides.length > 0 ? (
+ <>
  <select
  className="w-full p-4 rounded-lg bg-white/20 text-white border border-white/30"
  value={selectedRide?._id || ''}
@@ -81,7 +100,7 @@ export default function Landing() {
  >
  <option value="" className="text-gray-800">Choose a ride...</option>
  {rides.map(ride => (
- <option key={ride._id} value={ride._id} className="text-gray-800">
+ <option key={String(ride._id)} value={String(ride._id)} className="text-gray-800">
  {ride.name}
  </option>
  ))}
@@ -93,9 +112,13 @@ export default function Landing() {
  onClick={handleGo}
  className="w-full py-4 bg-green-500 hover:bg-green-600 text-white font-bold text-xl rounded-lg transition-colors"
  >
- START TRAINING →
+ START TRAINING
  </button>
  </div>
+ )}
+ </>
+ ) : (
+ <p className="text-center text-gray-400">No rides available for this park</p>
  )}
  </div>
  )}
