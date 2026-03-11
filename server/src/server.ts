@@ -1,9 +1,11 @@
-import express from 'express';
-import cors from 'cors';
 import dotenv from 'dotenv';
-
 dotenv.config();
 
+// DEBUG - Check what MONGODB_URI contains
+console.log('MONGODB_URI:', process.env.MONGODB_URI);
+
+import express from 'express';
+import cors from 'cors';
 import connectDB from './config/database';
 import rideRoutes from './routes/ride.route';
 import locationRoutes from './routes/location.route';
