@@ -3,9 +3,9 @@ import { join } from 'path';
 
 // Try multiple path strategies for cross-platform compatibility
 const possiblePaths = [
- join(process.cwd(), '..', '..', '.env'),        // From server/src/scripts to root
- join(process.cwd(), '.env'),                     // From server folder
- '/a0/usr/projects/gurgi/.env',                 // Docker absolute path
+ join(process.cwd(), '..', '..', '.env'),
+ join(process.cwd(), '.env'),
+ '/a0/usr/projects/gurgi/.env',
 ];
 
 let loaded = false;
@@ -24,7 +24,6 @@ for (const envPath of possiblePaths) {
 
 if (!loaded) {
  console.error('❌ Could not load .env from any location');
- console.error('Tried:', possiblePaths.join(', '));
 }
 
 console.log('MONGODB_URI is:', process.env.MONGODB_URI ? 'SET ✓' : 'NOT SET ✗');
@@ -33,6 +32,11 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import connectDB from '../config/database';
 import { Location, Ride, AdminUser } from '../models';
+
+// Helper to create slug
+function slugify(name: string): string {
+ return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
 
 const locations = [
  { name: 'Magic Kingdom', slug: 'magic-kingdom' },
@@ -83,15 +87,26 @@ const seedDatabase = async () => {
  const hollywood = locationMap.get('hollywood-studios');
  const animal = locationMap.get('animal-kingdom');
 
- for (const ride of magicKingdomRides) await Ride.create({ ...ride, location: mk, active: true });
- for (const ride of epcotRides) await Ride.create({ ...ride, location: epcot, active: true });
- for (const ride of hollywoodRides) await Ride.create({ ...ride, location: hollywood, active: true });
- for (const ride of animalKingdomRides) await Ride.create({ ...ride, location: animal, active: true });
+ // Create rides with nameSlug included
+ for (const ride of magicKingdomRides) {
+ await Ride.create({ ...ride, location: mk, active: true, nameSlug: slugify(ride.name) });
+ }
+ for (const ride of epcotRides) {
+ await Ride.create({ ...ride, location: epcot, active: true, nameSlug: slugify(ride.name) });
+ }
+ for (const ride of hollywoodRides) {
+ await Ride.create({ ...ride, location: hollywood, active: true, nameSlug: slugify(ride.name) });
+ }
+ for (const ride of animalKingdomRides) {
+ await Ride.create({ ...ride, location: animal, active: true, nameSlug: slugify(ride.name) });
+ }
+
+ console.log(`Created ${magicKingdomRides.length + epcotRides.length + hollywoodRides.length + animalKingdomRides.length} rides`);
 
  const hash = await bcrypt.hash('Munch13s&Crunch13s', 10);
  await AdminUser.create({ username: 'hornedking', passwordHash: hash, email: 'ace@digitalelegance.com' });
 
- console.log('\n✅ Database seeded successfully!');
+ console.log('✅ Database seeded successfully!');
  process.exit(0);
  } catch (error) {
  console.error('❌ Seed failed:', error);
