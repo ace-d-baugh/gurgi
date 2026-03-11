@@ -17,5 +17,8 @@
   "workspaces": [
     "client",
     "server"
-  ]
+  ],
+  "dependencies": {
+    "mongodb": "^7.1.0"
+  }
 }
