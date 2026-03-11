@@ -7,7 +7,7 @@ const parks = [
  { name: 'Magic Kingdom', slug: 'magic-kingdom', icon: '🏰' },
  { name: 'EPCOT', slug: 'epcot', icon: '🌍' },
  { name: 'Hollywood Studios', slug: 'hollywood-studios', icon: '🎬' },
- { name: 'Animal Kingdom', slug: 'animal-kingdom', icon: '🦒' }
+ { name: 'Animal Kingdom', slug: 'animal-kingdom', icon: '🌳' }
 ];
 
 export default function Landing() {
