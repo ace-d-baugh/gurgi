@@ -177,7 +177,7 @@ export default function Landing() {
  setSelectedRide(ride || null);
  }}
  >
- <option value="" className="text-gray-800 bg-white">Select a magical ride...</option>
+ <option value="" className="text-gray-800 bg-white">Select a Ride...</option>
  {rides.map(ride => (
  <option key={String(ride._id)} value={String(ride._id)} className="text-gray-800 bg-white">
  {ride.name} {ride.deviceTypeEmoji}
