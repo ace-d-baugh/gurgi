@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { rideApi } from '../services/api';
 import { Ride } from '../types';
+import HowToPlayModal from '../components/game/HowToPlayModal';
 
 const parks = [
  { name: 'Magic Kingdom', slug: 'magic-kingdom', icon: '🏰', gradient: 'from-blue-500 via-purple-500 to-pink-500' },
@@ -48,6 +49,8 @@ export default function Landing() {
  const [selectedRide, setSelectedRide] = useState<Ride | null>(null);
  const [loading, setLoading] = useState(false);
  const [error, setError] = useState('');
+
+ const [howToPlayOpen, setHowToPlayOpen] = useState(false);
 
  useEffect(() => {
  if (selectedPark) {
@@ -216,15 +219,32 @@ export default function Landing() {
  animate={{ opacity: 1 }}
  transition={{ delay: 0.6 }}
  className="mt-8 text-center"
- >
- <a 
- href="/proprietor" 
- className="text-white/50 hover:text-yellow-400 text-sm transition-colors inline-flex items-center gap-2 hover:underline"
- >
- <span>🔐</span> Administration
- </a>
- </motion.div>
- </div>
- </div>
- );
+
+<motion.div
+initial={{ opacity: 0 }}
+animate={{ opacity: 1 }}
+transition={{ delay: 0.6 }}
+className="mt-8 text-center flex items-center justify-center gap-6"
+>
+<motion.button
+whileHover={{ scale: 1.05 }}
+whileTap={{ scale: 0.95 }}
+onClick={() => setHowToPlayOpen(true)}
+className="text-white/50 hover:text-yellow-400 text-sm transition-colors inline-flex items-center gap-2 hover:underline cursor-pointer"
+>
+<span>📖</span> How to Play
+</motion.button>
+<a
+href="/proprietor"
+className="text-white/50 hover:text-yellow-400 text-sm transition-colors inline-flex items-center gap-2 hover:underline"
+>
+<span>🔐</span> Administration
+</a>
+</motion.div>
+</div>
+
+{/* How To Play Modal */}
+<HowToPlayModal isOpen={howToPlayOpen} onClose={() => setHowToPlayOpen(false)} />
+</div>
+);
 }

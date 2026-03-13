@@ -52,9 +52,6 @@ function SlideMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
  <a href="#" className="block px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg transition-colors">
  About GURGI
  </a>
- <a href="#" className="block px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg transition-colors">
- How to Play
- </a>
  <button 
  onClick={() => navigate('/')}
  className="block w-full text-left px-4 py-3 text-blue-400 hover:bg-gray-800 rounded-lg transition-colors"
