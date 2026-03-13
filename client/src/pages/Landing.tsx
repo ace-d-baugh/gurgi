@@ -213,12 +213,13 @@ export default function Landing() {
  </motion.div>
  )}
  </motion.div>
+</div>
 
  <motion.div
  initial={{ opacity: 0 }}
  animate={{ opacity: 1 }}
  transition={{ delay: 0.6 }}
- className="mt-8 text-center"
+ className="mt-8 text-center">
 
 <motion.div
 initial={{ opacity: 0 }}
@@ -241,7 +242,7 @@ className="text-white/50 hover:text-yellow-400 text-sm transition-colors inline-
 <span>🔐</span> Administration
 </a>
 </motion.div>
-</div>
+</motion.div>
 
 {/* How To Play Modal */}
 <HowToPlayModal isOpen={howToPlayOpen} onClose={() => setHowToPlayOpen(false)} />
