@@ -302,14 +302,14 @@ export default function Game() {
 
  const loadGame = async () => {
  try {
- const [rideRes, guestRes] = await Promise.all([
- rideApi.getBySlug(rideSlug || ''),
+ const [gameConfigRes, guestRes] = await Promise.all([
+ gameApi.getConfig(rideSlug || ''),
  gameApi.generateGuests(30, config.maxGroupSize)
  ]);
 
  if (!isMounted) return;
 
- setRide(rideRes.data);
+ setRide(gameConfigRes.data);
 
  // Create game groups with the generated guest sizes
  const gameGroups: GameGroup[] = guestRes.data.groups.map((g: any, i: number) => {
@@ -334,7 +334,7 @@ export default function Game() {
  setGroups(gameGroups);
 
  // Initialize vehicle capacity based on ride config
- const capacity = (rideRes.data.guests[0] as number[])?.reduce((a: number, b: number) => a + b, 0) || 6;
+ const capacity = (gameConfigRes.data.guests[0] as number[])?.reduce((a: number, b: number) => a + b, 0) || 6;
  setVehicleGuests(new Array(capacity).fill(null));
 
  } catch (err) {
