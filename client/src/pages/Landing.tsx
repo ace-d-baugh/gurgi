@@ -200,7 +200,7 @@ export default function Landing() {
  onClick={handleGo}
  className="bg-gradient-to-r from-green-400 to-emerald-500 text-white font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-xl hover:shadow-green-400/30 transition-all text-lg uppercase tracking-wider"
  >
- Start Your Adventure ✨
+ Start Training! ✨
  </motion.button>
  <p className="text-white/60 mt-4">Training for: <span className="text-yellow-300">{selectedRide.name}</span></p>
  </motion.div>
