@@ -30,7 +30,7 @@ export const gameController = {
  getGameConfig: async (req: Request, res: Response) => {
  try {
  const { rideId } = req.params;
- const ride = await Ride.findById(rideId).populate('location');
+ const ride = await Ride.findOne({ nameSlug: rideId }).populate('location');
 
  if (!ride) {
  return res.status(404).json({ error: 'Ride not found' });
