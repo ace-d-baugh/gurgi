@@ -302,6 +302,7 @@ export default function Game() {
 
  const loadGame = async () => {
  try {
+ console.log('Loading game for ride:', rideSlug);
  const [gameConfigRes, guestRes] = await Promise.all([
  gameApi.getConfig(rideSlug || ''),
  gameApi.generateGuests(30, config.maxGroupSize)
@@ -309,7 +310,11 @@ export default function Game() {
 
  if (!isMounted) return;
 
+ console.log('API responses - gameConfig:', gameConfigRes.data);
+ console.log('API responses - guestRes data:', guestRes.data);
+
  setRide(gameConfigRes.data);
+ console.log('Ride set, guests data:', gameConfigRes.data.guests);
 
  // Create game groups with the generated guest sizes
  const gameGroups: GameGroup[] = guestRes.data.groups.map((g: any, i: number) => {
@@ -334,11 +339,13 @@ export default function Game() {
  setGroups(gameGroups);
 
  // Initialize vehicle capacity based on ride config
- const capacity = (gameConfigRes.data.guests[0] as number[])?.reduce((a: number, b: number) => a + b, 0) || 6;
+ const capacity = Array.isArray(gameConfigRes.data.guests[0]) ? (gameConfigRes.data.guests[0] as number[]).reduce((a: number, b: number) => a + b, 0) : (gameConfigRes.data.guests[0] as number) || 6;
  setVehicleGuests(new Array(capacity).fill(null));
 
  } catch (err) {
- if (isMounted) setError('Failed to load game');
+ console.error('Game load error:', err);
+ console.error('Error stack:', (err as any)?.stack);
+ if (isMounted) setError('Failed to load game: ' + (err as any)?.message || String(err));
  } finally {
  if (isMounted) setLoading(false);
  }
@@ -489,7 +496,7 @@ export default function Game() {
 
  // Reset for next vehicle
  setTimeout(() => {
- const capacity = (ride?.guests[0] as number[])?.reduce((a: number, b: number) => a + b, 0) || 6;
+ const capacity = Array.isArray(ride?.guests[0]) ? (ride.guests[0] as number[]).reduce((a: number, b: number) => a + b, 0) : (ride?.guests[0] as number) || 6;
  setVehicleGuests(new Array(capacity).fill(null));
  setVehicleNumber(prev => prev + 1);
  }, 500);
