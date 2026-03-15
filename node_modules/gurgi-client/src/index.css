@@ -29,7 +29,7 @@
 
 @layer base {
  body {
- @apply bg-midnight text-white antialiased;
+ @apply bg-gray-900 text-white antialiased;
  font-family: 'Inter', system-ui, -apple-system, sans-serif;
  background: var(--gradient-castle);
  background-attachment: fixed;
