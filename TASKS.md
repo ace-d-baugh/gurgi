@@ -13,13 +13,13 @@
 ### UI Cleanup
 | # | Task | Status | Priority |
 |---|------|--------|----------|
-| 1 | Remove second "+ Add New Ride" button (keep top one only) | ⏳ | Critical |
-| 2 | Remove search bar from rides page | ⏳ | Critical |
-| 3 | Remove "Capacity" column from rides table | ⏳ | Critical |
-| 4 | Fix Status column - showing inactive instead of active | ⏳ | Critical |
-| 5 | Move "logged in as" div under GURGI admin panel in sidebar | ⏳ | Medium |
-| 6 | Create Return to Main link above Sign Out | ⏳ | Medium |
-| 7 | Make Return to Main & Sign Out sticky at bottom of sidebar | ⏳ | Medium |
+| 1 | Remove second "+ Add New Ride" button (keep top one only) | ✅ Complete | Critical |
+| 2 | Remove search bar from rides page | ✅ Complete | Critical |
+| 3 | Remove "Capacity" column from rides table | ✅ Complete | Critical |
+| 4 | Fix Status column - showing inactive instead of active | ✅ Complete | *Needs visual verification | Critical |
+| 5 | Move "logged in as" div under GURGI admin panel in sidebar | ✅ Complete | Medium |
+| 6 | Create Return to Main link above Sign Out | ✅ Complete | Medium |
+| 7 | Make Return to Main & Sign Out sticky at bottom of sidebar | ✅ Complete | Medium |
 
 ### Accordion & Organization
 | # | Task | Status | Priority |
