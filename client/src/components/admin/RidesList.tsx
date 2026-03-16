@@ -121,9 +121,7 @@ export const RidesList: React.FC<RidesListProps> = ({
           <table className="w-full">
             <thead>
               <tr className="border-b border-white/10 bg-white/5">
-                <SortHeader field="name">Name</SortHeader>
-                <SortHeader field="location" className="hidden sm:table-cell">Location</SortHeader>
-                <SortHeader field="type" className="hidden md:table-cell">Type</SortHeader>
+                <SortHeader field="name">Name</SortHeader>                <SortHeader field="type" className="hidden md:table-cell">Type</SortHeader>
                 <SortHeader field="capacity" className="hidden lg:table-cell">Capacity</SortHeader>
                 <SortHeader field="isActive">Status</SortHeader>
                 <th className="px-4 py-3 text-right text-xs font-medium text-white/70 uppercase tracking-wider">Actions</th>
@@ -132,7 +130,7 @@ export const RidesList: React.FC<RidesListProps> = ({
             <tbody className="divide-y divide-white/10">
               {filteredAndSortedRides.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-4 py-8 text-center text-white/60">
+                  <td colSpan={5} className="px-4 py-8 text-center text-white/60">
                     {searchQuery ? 'No rides match your search' : 'No rides found'}
                   </td>
                 </tr>
@@ -146,11 +144,7 @@ export const RidesList: React.FC<RidesListProps> = ({
                   >
                     <td className="px-4 py-4">
                       <div className="font-medium text-white">{ride.name}</div>
-                    </td>
-                    <td className="px-4 py-4 hidden sm:table-cell">
-                      <span className="text-indigo-100/80">{getLocationName(ride.locationId)}</span>
-                    </td>
-                    <td className="px-4 py-4 hidden md:table-cell">
+                    </td>                    <td className="px-4 py-4 hidden md:table-cell">
                       <span className="px-2 py-1 rounded-lg bg-indigo-500/20 text-indigo-200 text-sm">
                         {ride.rideType}
                       </span>

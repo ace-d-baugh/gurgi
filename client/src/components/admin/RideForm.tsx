@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { X, Save, MapPin, Type, Hash, Users, Check } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, Save, MapPin, Type, Hash, Users, Check, ChevronDown, ChevronUp } from 'lucide-react';
 import { Ride, Location } from '../../types';
 
 export interface RideFormProps {
@@ -21,6 +21,44 @@ const rideTypes = [
   'Motion Simulator',
   'Carousel'
 ];
+
+interface AccordionSectionProps {
+  title: string;
+  icon: React.ReactNode;
+  isOpen: boolean;
+  onToggle: () => void;
+  children: React.ReactNode;
+}
+
+const AccordionSection: React.FC<AccordionSectionProps> = ({ title, icon, isOpen, onToggle, children }) => (
+  <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
+    <button
+      type="button"
+      onClick={onToggle}
+      className="w-full px-4 py-3 flex items-center justify-between bg-white/5 hover:bg-white/10 transition-colors"
+    >
+      <div className="flex items-center gap-2 text-sm font-semibold text-indigo-200">
+        {icon}
+        {title}
+      </div>
+      {isOpen ? <ChevronUp className="w-4 h-4 text-indigo-300" /> : <ChevronDown className="w-4 h-4 text-indigo-300" />}
+    </button>
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: 'auto', opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <div className="p-4 border-t border-white/10">
+            {children}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  </div>
+);
 
 export const RideForm: React.FC<RideFormProps> = ({
   ride,
@@ -45,6 +83,17 @@ export const RideForm: React.FC<RideFormProps> = ({
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [dimensions, setDimensions] = useState({ width: 0, rows: 0, height: 0 });
+
+  // Accordion state
+  const [openSections, setOpenSections] = useState({
+    basicInfo: true,
+    vehicleConfig: false,
+    loadingPrefs: false
+  });
+
+  const toggleSection = (section: keyof typeof openSections) => {
+    setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
+  };
 
   useEffect(() => {
     if (ride) {
@@ -173,78 +222,89 @@ export const RideForm: React.FC<RideFormProps> = ({
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
-          {/* Basic Info */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label className="flex items-center gap-2 text-sm font-medium text-indigo-200">
-                <Type className="w-4 h-4" /> Ride Name
-              </label>
-              <input
-                type="text"
-                value={formData.name || ''}
-                onChange={(e) => handleNameChange(e.target.value)}
-                placeholder="e.g. Space Mountain"
-                className="w-full px-4 py-3 rounded-xl bg-white/10 border border-indigo-400/30 text-white placeholder-indigo-300/50 focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all"
-              />
-              {errors.name && <p className="text-red-400 text-sm">{errors.name}</p>}
-              {formData.nameSlug && (
-                <p className="text-indigo-300/60 text-xs">Slug: {formData.nameSlug}</p>
-              )}
+        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          {/* Section 1: Basic Info */}
+          <AccordionSection
+            title="Basic Info"
+            icon={<Type className="w-4 h-4" />}
+            isOpen={openSections.basicInfo}
+            onToggle={() => toggleSection('basicInfo')}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-indigo-200">
+                  <Type className="w-4 h-4" /> Ride Name
+                </label>
+                <input
+                  type="text"
+                  value={formData.name || ''}
+                  onChange={(e) => handleNameChange(e.target.value)}
+                  placeholder="e.g. Space Mountain"
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border border-indigo-400/30 text-white placeholder-indigo-300/50 focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all"
+                />
+                {errors.name && <p className="text-red-400 text-sm">{errors.name}</p>}
+                {formData.nameSlug && (
+                  <p className="text-indigo-300/60 text-xs">Slug: {formData.nameSlug}</p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-indigo-200">
+                  <MapPin className="w-4 h-4" /> Location
+                </label>
+                <select
+                  value={typeof formData.location === 'object' ? formData.location?._id : formData.location || ''}
+                  onChange={(e) => {
+                    const loc = locations.find(l => l._id === e.target.value);
+                    handleChange('location', loc);
+                  }}
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border border-indigo-400/30 text-white focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all"
+                >
+                  <option value="" className="bg-slate-800">Select location...</option>
+                  {locations.map(loc => (
+                    <option key={loc._id} value={loc._id} className="bg-slate-800">{loc.name}</option>
+                  ))}
+                </select>
+                {errors.location && <p className="text-red-400 text-sm">{errors.location}</p>}
+              </div>
             </div>
 
-            <div className="space-y-2">
-              <label className="flex items-center gap-2 text-sm font-medium text-indigo-200">
-                <MapPin className="w-4 h-4" /> Location
-              </label>
+            <div className="space-y-2 mt-4">
+              <label className="text-sm font-medium text-indigo-200">Ride Type</label>
               <select
-                value={typeof formData.location === 'object' ? formData.location?._id : formData.location || ''}
-                onChange={(e) => {
-                  const loc = locations.find(l => l._id === e.target.value);
-                  handleChange('location', loc);
-                }}
+                value={formData.rideType || ''}
+                onChange={(e) => handleChange('rideType', e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-white/10 border border-indigo-400/30 text-white focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all"
               >
-                <option value="" className="bg-slate-800">Select location...</option>
-                {locations.map(loc => (
-                  <option key={loc._id} value={loc._id} className="bg-slate-800">{loc.name}</option>
+                {rideTypes.map(type => (
+                  <option key={type} value={type} className="bg-slate-800">{type}</option>
                 ))}
               </select>
-              {errors.location && <p className="text-red-400 text-sm">{errors.location}</p>}
             </div>
-          </div>
 
-          {/* Description */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-indigo-200">Description</label>
-            <textarea
-              value={formData.description || ''}
-              onChange={(e) => handleChange('description', e.target.value)}
-              placeholder="Brief description of the ride..."
-              rows={3}
-              className="w-full px-4 py-3 rounded-xl bg-white/10 border border-indigo-400/30 text-white placeholder-indigo-300/50 focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all resize-none"
-            />
-          </div>
+            <div className="mt-4">
+              <label className="flex items-center gap-3 cursor-pointer group">
+                <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${formData.active ? 'bg-green-500 border-green-500' : 'border-indigo-400/50 group-hover:border-indigo-400'}`}>
+                  {formData.active && <Check className="w-3 h-3 text-white" />}
+                </div>
+                <input
+                  type="checkbox"
+                  checked={formData.active}
+                  onChange={(e) => handleChange('active', e.target.checked)}
+                  className="sr-only"
+                />
+                <span className="text-sm text-indigo-100 font-medium">Active</span>
+              </label>
+            </div>
+          </AccordionSection>
 
-          {/* Ride Type */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-indigo-200">Ride Type</label>
-            <select
-              value={formData.rideType || ''}
-              onChange={(e) => handleChange('rideType', e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-white/10 border border-indigo-400/30 text-white focus:outline-none focus:border-indigo-400 focus:bg-white/15 transition-all"
-            >
-              {rideTypes.map(type => (
-                <option key={type} value={type} className="bg-slate-800">{type}</option>
-              ))}
-            </select>
-          </div>
-
-          {/* Vehicle Configuration */}
-          <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-            <h3 className="text-sm font-semibold text-indigo-200 mb-4 flex items-center gap-2">
-              <Users className="w-4 h-4" /> Vehicle Configuration
-            </h3>
+          {/* Section 2: Vehicle Configuration */}
+          <AccordionSection
+            title="Vehicle Configuration"
+            icon={<Users className="w-4 h-4" />}
+            isOpen={openSections.vehicleConfig}
+            onToggle={() => toggleSection('vehicleConfig')}
+          >
             <div className="grid grid-cols-3 gap-4">
               <div>
                 <label className="text-xs text-indigo-300/70 mb-1 block">Width (seats)</label>
@@ -280,11 +340,15 @@ export const RideForm: React.FC<RideFormProps> = ({
             <div className="mt-3 text-xs text-indigo-300/60">
               Capacity: <span className="text-amber-300 font-semibold">{getCapacity()}</span> guests per vehicle
             </div>
-          </div>
+          </AccordionSection>
 
-          {/* Options */}
-          <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-            <h3 className="text-sm font-semibold text-indigo-200 mb-3">Options</h3>
+          {/* Section 3: Loading Preferences */}
+          <AccordionSection
+            title="Loading Preferences"
+            icon={<Hash className="w-4 h-4" />}
+            isOpen={openSections.loadingPrefs}
+            onToggle={() => toggleSection('loadingPrefs')}
+          >
             <div className="grid grid-cols-2 gap-4">
               <label className="flex items-center gap-3 cursor-pointer group">
                 <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${formData.singleRiders ? 'bg-amber-500 border-amber-500' : 'border-indigo-400/50 group-hover:border-indigo-400'}`}>
@@ -337,21 +401,8 @@ export const RideForm: React.FC<RideFormProps> = ({
                 />
                 <span className="text-sm text-indigo-100">Double Grouping</span>
               </label>
-
-              <label className="flex items-center gap-3 cursor-pointer group">
-                <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${formData.active ? 'bg-green-500 border-green-500' : 'border-indigo-400/50 group-hover:border-indigo-400'}`}>
-                  {formData.active && <Check className="w-3 h-3 text-white" />}
-                </div>
-                <input
-                  type="checkbox"
-                  checked={formData.active}
-                  onChange={(e) => handleChange('active', e.target.checked)}
-                  className="sr-only"
-                />
-                <span className="text-sm text-indigo-100 font-medium">Active</span>
-              </label>
             </div>
-          </div>
+          </AccordionSection>
 
           {/* Actions */}
           <div className="flex gap-3 justify-end pt-4 border-t border-white/10">
