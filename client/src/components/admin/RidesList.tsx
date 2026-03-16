@@ -11,7 +11,7 @@ interface RidesListProps {
   onCreate: () => void;
 }
 
-type SortField = 'name' | 'location' | 'type' | 'capacity' | 'isActive';
+type SortField = 'name' | 'location' | 'type' | 'isActive';
 type SortDirection = 'asc' | 'desc';
 
 export const RidesList: React.FC<RidesListProps> = ({
@@ -95,12 +95,6 @@ export const RidesList: React.FC<RidesListProps> = ({
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
-        <div className="relative flex-1 w-full sm:max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50" />
-          <input
-            type="text"
-            placeholder="Search rides by name, location..."
-            value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-amber-400/50 transition-colors"
           />
@@ -122,7 +116,6 @@ export const RidesList: React.FC<RidesListProps> = ({
             <thead>
               <tr className="border-b border-white/10 bg-white/5">
                 <SortHeader field="name">Name</SortHeader>                <SortHeader field="type" className="hidden md:table-cell">Type</SortHeader>
-                <SortHeader field="capacity" className="hidden lg:table-cell">Capacity</SortHeader>
                 <SortHeader field="isActive">Status</SortHeader>
                 <th className="px-4 py-3 text-right text-xs font-medium text-white/70 uppercase tracking-wider">Actions</th>
               </tr>
@@ -150,7 +143,6 @@ export const RidesList: React.FC<RidesListProps> = ({
                       </span>
                     </td>
                     <td className="px-4 py-4 hidden lg:table-cell">
-                      <span className="text-white/80">{ride.capacity}</span>
                     </td>
                     <td className="px-4 py-4">
                       <span

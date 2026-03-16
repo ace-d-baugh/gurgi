@@ -244,10 +244,6 @@ export default function Admin() {
  <h2 className="text-3xl font-bold text-white mb-1">Rides</h2>
  <p className="text-indigo-300/60">Manage attraction configurations</p>
  </div>
- <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => { setEditingRide(null); setShowRideForm(true); }} className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-white font-semibold rounded-xl shadow-lg shadow-amber-500/30 transition-all">
- <Plus className="w-5 h-5" />Add New Ride
- </motion.button>
- </div>
 
  <RidesList rides={rides} locations={locations} onEdit={(ride) => { setEditingRide(ride); setShowRideForm(true); }} onDelete={(id) => setDeletingRideId(id)} isLoading={loading} />
 
