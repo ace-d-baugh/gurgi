@@ -1,100 +1,133 @@
-# GURGI - Beyond MVP Task List
+# GURGI Project Tasks
 
-## Status: Sprint 2 - COMPLETE ✨
-
----
-
-### Task 1: Complete Ride Database ✅
-- **Status:** COMPLETED (54 rides added)
-- **Actual-ride-count:** 54 of target 67
-- **Next-add:** Additional seasonal/show attractions if requested
+## Status Legend
+- ✅ Complete
+- 🔄 In Progress
+- ⏳ Pending
+- ❌ Blocked
 
 ---
 
-### Task 2: Game Mechanics Overhaul ✅
-- **Priority:** HIGH
-- **Status:** COMPLETED
-- **Sub-tasks finished:**
- - ✅ Rebuild guest queue as linear array (sequential processing)
- - ✅ Implement "discovery" gameplay (tap first → revealSize → activate)
- - ✅ Remove "+2" notation - show individuals inline
- - ✅ Guest-to-seat animation (walk across screen)
- - ✅ Vehicle entry (bottom) → load → exit (top) animation
- - ✅ Vehicle states: entering, loading, ready, exiting, exited
- - ✅ Mystery/Discovered group components
- - ✅ WalkingGuest animation component
- - ✅ Score tracking (loaded, dispatched)
+## 🔴 CRITICAL - Admin Panel Fixes
 
-**Implementation:** Game.tsx (745 lines)
-**Commit:** 85971008e
+### UI Cleanup
+| # | Task | Status | Priority |
+|---|------|--------|----------|
+| 1 | Remove second "+ Add New Ride" button (keep top one only) | ⏳ | Critical |
+| 2 | Remove search bar from rides page | ⏳ | Critical |
+| 3 | Remove "Capacity" column from rides table | ⏳ | Critical |
+| 4 | Fix Status column - showing inactive instead of active | ⏳ | Critical |
+| 5 | Move "logged in as" div under GURGI admin panel in sidebar | ⏳ | Medium |
+| 6 | Create Return to Main link above Sign Out | ⏳ | Medium |
+| 7 | Make Return to Main & Sign Out sticky at bottom of sidebar | ⏳ | Medium |
 
----
+### Accordion & Organization
+| # | Task | Status | Priority |
+| --- | --- | --- | --- |
+| 8 | Create collapsible location headers with rides underneath | ⏳ | Critical |
+| 9 | Maintain alphabetical sorting as default | ⏳ | Medium |
 
-### Task 3: How To Play Modal ✅
-- **Priority:** MEDIUM
-- **Status:** COMPLETED
-- **Implementation:** HowToPlayModal.tsx (9,597 bytes)
-- **Features:** Modal, backdrop, escape key, 4-step rules
+### Locations Page
+| # | Task | Status | Priority |
+| --- | --- | --- | --- |
+| 10 | Change locations to popup modal instead of inline editing | ⏳ | Critical |
+| 11 | Location form: show only Name field (hide slug from user) | ⏳ | Critical |
+| 12 | Remove slug column from locations table | ⏳ | Critical |
 
----
+### Rides Page UX
+| # | Task | Status | Priority |
+| --- | --- | --- | --- |
+| 13 | Make actions always visible (not hover-only) for mobile | ⏳ | Critical |
 
-### Task 4: Admin Panel CRUD ✅
-- **Priority:** MEDIUM
-- **Status:** COMPLETED
-- **Components:** All CRUD components functional
-- **Polish Completed:**
- - ✅ Remove Location column from RidesList (commit d404a52e7)
- - ✅ Add accordion sections to RideForm:
-   * Basic Info (name, nameSlug, rideType, active)
-   * Vehicle Configuration (dimensions, capacity)
-   * Loading Preferences (evenOddLines, singleRiders, rowRequest, doubleGroupable)
- - ✅ Table view of rides/locations
- - ✅ Create/Edit forms with validation
- - ✅ Soft-delete (deactivate toggle)
- - ✅ Authenticated only (/proprietor)
- - ✅ Toast notifications
-
-**Commit:** d404a52e7 (2026-03-16)
+### Vehicle Configuration Form
+| # | Task | Status | Priority |
+| --- | --- | --- | --- |
+| 14 | Redesign: "Row 1" with "Seats per Row" input | ⏳ | Critical |
+| 15 | Add "+" button to add more rows | ⏳ | Critical |
+| 16 | Add "-" button to remove rows (not on first row) | ⏳ | Critical |
+| 17 | Map to guests array [2,2,2] etc | ⏳ | Critical |
+| 18 | Ride Type Model: Click "Row 1" label to cycle through Enum types: "Stop and Go Single Vehicle", "Interval Batch Loader", "Continuous Mover", "Corral Counter", "Multiple Interval Batch Loader", "Multiple Stop and Go Single Vehicle" | ⏳ | Critical |
+| 19 | If type is "Corral Counter" show "Max Capacity" instead of "Row 1" (single value, no +/- buttons) | ⏳ | Critical |
+| 20 | Fix Ride Type in edit form to include only enum types | ⏳ | Critical |
 
 ---
 
-### Task 5: UI Text Changes ✅
-- **Status:** COMPLETED
-- **Changes applied:** "Select a magical ride" → "Select a Ride...", "Start Your Adventure" → "Start Grouping"
+## 🔴 Game Play Fixes
+
+| # | Task | Status | Priority |
+|---|------|--------|----------|
+| 21 | Remove "DISCOVERED" badge from groups | ⏳ | Critical |
+| 22 | Remove "FRONT" text from queue | ⏳ | Critical |
+| 23 | Show seat circles (hollow/filled) not just text | ⏳ | Critical |
+| 24 | Fix sequential discovery - unlock 1st then 2nd then 3rd | ⏳ | Critical |
+| 25 | Fix vehicle showing all rows not just one | ⏳ | Critical |
+| 26 | Center vehicle vertically on screen | ⏳ | Medium |
 
 ---
 
-### Task 6: Queue Visual Design ✅
-- **Priority:** HIGH
-- **Status:** COMPLETED
-- **Design specs:**
- - ✅ Single-file line formation
- - ✅ Inline guest display (colored circles)
- - ✅ Border/box around groups
- - ✅ Front-of-queue highlighted
+## 🟠 Main Page & Navigation
+
+| # | Task | Status | Priority |
+|---|------|--------|----------|
+| 27 | Fix How to Play X button to close popup | ⏳ | Critical |
+| 28 | Move How to Play + Administration links to hamburger menu | ⏳ | Critical |
+| 29 | Create About page from README/PRD | ⏳ | Medium |
+| 30 | Fix park re-click - dropdown should reload not disappear | ⏳ | Critical |
+| 31 | Add About link to hamburger menu | ⏳ | Medium |
 
 ---
 
-## Sprint 2 Complete! 🎉
+## 🟠 Ride Page (Game Interface)
 
-**All 6 core tasks finished!**
+| # | Task | Status | Priority |
+|---|------|--------|----------|
+| 32 | Remove How to Play from Guest Queue sidebar | ⏳ | Critical |
+| 33 | Add How to Play link to hamburger menu (reuse modal) | ⏳ | Critical |
+| 34 | Guest queue: full view not sidebar (better animations) | ⏳ | Critical |
+| 35 | Background particles: Change color every 3 seconds (gold → bronze → copper → yellow → gold) | ⏳ | Low |
 
-| Task | Status |
-|------|--------|
-| Task 1: Ride Database | ✅ Complete |
-| Task 2: Game Mechanics | ✅ Complete |
-| Task 3: How To Play Modal | ✅ Complete |
-| Task 4: Admin CRUD | ✅ Complete |
-| Task 5: UI Text Changes | ✅ Complete |
-| Task 6: Queue Visual Design | ✅ Complete |
+---
 
-**Repository:** Updated and pushed
-**Tasks in queue:** 0
-**Subagents needed:** 0
+## 🟢 PRD Features - Not Yet Implemented
 
-**Next Steps (Optional Sprint 3):**
-- Add remaining 13 seasonal/show attractions
-- Visual polish
-- Performance optimization
+| # | Task | Status | Priority |
+|---|------|--------|----------|
+| 36 | Game options popup (scenario configuration) | ⏳ | High |
+| 37 | "Call for #" functionality | ⏳ | High |
+| 38 | Single rider line support | ⏳ | High |
+| 39 | Automatic dispatch timer | ⏳ | Medium |
+| 40 | Drag-and-drop guest placement | ⏳ | Medium |
+| 41 | Session timeout handling | ⏳ | Low |
+| 42 | Password recovery via email | ⏳ | Low |
 
-**Last verified:** 03:12 EST 2026-03-16
+---
+
+## 📋 Definitions
+
+### Ride Type Enum
+Only these should exist:
+1. Stop and Go Single Vehicle
+2. Interval Batch Loader
+3. Continuous Mover
+4. Corral Counter
+5. Multiple Interval Batch Loader
+6. Multiple Stop and Go Single Vehicle
+
+### Vehicle Configuration Examples
+- **[2,2,2]** = 3 rows, 2 seats each (e.g., Astro Orbiter)
+- **[6,6]** = 2 rows, 6 seats each (e.g., Space Mountain)
+- **[10]** = 1 corral, 10 capacity (e.g., Corral Counter)
+
+### Slugs
+All slugs auto-generated from name, NEVER manually entered by user.
+
+---
+
+## Summary
+
+**Critical Tasks:** 35
+**High Priority:** 3
+**Medium/Low:** 4
+**Total Remaining:** 42
+
+Last Updated: 2026-03-16
