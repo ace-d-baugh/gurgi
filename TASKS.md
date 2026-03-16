@@ -56,10 +56,10 @@
 
 | # | Task | Status | Priority |
 |---|------|--------|----------|
-| 21 | Remove "DISCOVERED" badge from groups | ⏳ | Critical |
-| 22 | Remove "FRONT" text from queue | ⏳ | Critical |
-| 23 | Show seat circles (hollow/filled) not just text | ⏳ | Critical |
-| 24 | Fix sequential discovery - unlock 1st then 2nd then 3rd | ⏳ | Critical |
+| 21 | Remove "DISCOVERED" badge from groups | ✅ Complete | | Critical |
+| 22 | Remove "FRONT" text from queue | ✅ Complete | | Critical |
+| 23 | Show seat circles (hollow/filled) not just text | ✅ Complete | | Critical |
+| 24 | Fix sequential discovery - unlock 1st then 2nd then 3rd | ✅ Complete | | Critical |
 | 25 | Fix vehicle showing all rows not just one | ⏳ | Critical |
 | 26 | Center vehicle vertically on screen | ⏳ | Medium |
 
