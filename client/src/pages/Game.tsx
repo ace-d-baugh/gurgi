@@ -329,8 +329,17 @@ export default function Game() {
         setGroups(gameGroups);
 
         // Initialize vehicle capacity based on ride config
-        const capacity = Array.isArray(gameConfigRes.data.guests[0]) ? (gameConfigRes.data.guests[0] as number[]).reduce((a: number, b: number) => a + b, 0) : (gameConfigRes.data.guests[0] as number) || 6;
-        setVehicleGuests(new Array(capacity).fill(null));
+ // Initialize vehicle capacity based on ride config
+ const guests = gameConfigRes.data?.guests;
+ let capacity = 6;
+ if (guests && guests.length > 0) {
+ if (Array.isArray(guests[0])) {
+ capacity = (guests[0] as number[]).reduce((a: number, b: number) => a + b, 0);
+ } else {
+ capacity = (guests[0] as number) || 6;
+ }
+ }
+ setVehicleGuests(new Array(capacity).fill(null));
 
       } catch (err) {
         console.error('Game load error:', err);
