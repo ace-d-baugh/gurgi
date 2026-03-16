@@ -223,11 +223,14 @@ export default function Admin() {
  })}
  </nav>
 
- <div className="absolute bottom-6 left-6 right-6">
- <div className="bg-slate-800/50 border border-indigo-500/20 rounded-xl p-4 mb-4">
+ <div className="mt-auto pt-6 sticky bottom-0 bg-slate-900/80 backdrop-blur-xl">
+ <div className="bg-slate-800/50 border border-indigo-500/20 rounded-xl p-4 mb-3">
  <p className="text-indigo-300/60 text-xs mb-1">Logged in as</p>
  <p className="text-white font-medium">The Horned King</p>
  </div>
+ <a href="/" className="flex items-center gap-3 px-4 py-3 mb-3 text-indigo-300 hover:bg-white/5 hover:text-white rounded-xl transition-all">
+ <Home className="w-5 h-5" />Return to Main
+ </a>
  <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 text-red-400 hover:bg-red-500/20 rounded-xl transition-all">
  <LogOut className="w-5 h-5" />Sign Out
  </button>
