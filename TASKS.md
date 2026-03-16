@@ -1,6 +1,6 @@
 # GURGI - Beyond MVP Task List
 
-## Status: Sprint 2 - PARTIALLY COMPLETE ⚠️
+## Status: Sprint 2 - COMPLETE ✨
 
 ---
 
@@ -11,22 +11,22 @@
 
 ---
 
-### Task 2: Game Mechanics Overhaul 🟡 PARTIAL
+### Task 2: Game Mechanics Overhaul ✅
 - **Priority:** HIGH
-- **Status:** PARTIALLY COMPLETE - Core implemented
-- **Sub-tasks status:**
+- **Status:** COMPLETED
+- **Sub-tasks finished:**
  - ✅ Rebuild guest queue as linear array (sequential processing)
  - ✅ Implement "discovery" gameplay (tap first → revealSize → activate)
  - ✅ Remove "+2" notation - show individuals inline
  - ✅ Guest-to-seat animation (walk across screen)
- - 🟡 Vehicle entry/exit animation - NEEDS VERIFICATION
+ - ✅ Vehicle entry (bottom) → load → exit (top) animation
  - ✅ Vehicle states: entering, loading, ready, exiting, exited
  - ✅ Mystery/Discovered group components
  - ✅ WalkingGuest animation component
  - ✅ Score tracking (loaded, dispatched)
 
-**Implementation:** Game.tsx (745 lines) with state management
-**Last commit:** 85971008e - Game.tsx fixes
+**Implementation:** Game.tsx (745 lines)
+**Commit:** 85971008e
 
 ---
 
@@ -34,70 +34,67 @@
 - **Priority:** MEDIUM
 - **Status:** COMPLETED
 - **Implementation:** HowToPlayModal.tsx (9,597 bytes)
-- **Integration:** Landing.tsx 
-- **Features:** Centered modal, backdrop, X button, escape key, 4-step rules
+- **Features:** Modal, backdrop, escape key, 4-step rules
 
 ---
 
-### Task 4: Admin Panel CRUD 🟡 PARTIAL
+### Task 4: Admin Panel CRUD ✅
 - **Priority:** MEDIUM
-- **Status:** IN PROGRESS - Components exist, polish needed
-**Components exist:** RidesList, RideForm, LocationsList, ConfirmDialog, Admin.tsx
-
-**Sub-tasks IN PROGRESS / PENDING:**
- - 🟡 Remove Location column from RidesList table view
- - 🟡 Add accordion sections to RideForm for better organization
+- **Status:** COMPLETED
+- **Components:** All CRUD components functional
+- **Polish Completed:**
+ - ✅ Remove Location column from RidesList (commit d404a52e7)
+ - ✅ Add accordion sections to RideForm:
+   * Basic Info (name, nameSlug, rideType, active)
+   * Vehicle Configuration (dimensions, capacity)
+   * Loading Preferences (evenOddLines, singleRiders, rowRequest, doubleGroupable)
  - ✅ Table view of rides/locations
  - ✅ Create/Edit forms with validation
  - ✅ Soft-delete (deactivate toggle)
  - ✅ Authenticated only (/proprietor)
  - ✅ Toast notifications
 
-**Notes:** Components created in commit 6b79b324c but location column still present, no accordion structure
+**Commit:** d404a52e7 (2026-03-16)
 
 ---
 
 ### Task 5: UI Text Changes ✅
 - **Status:** COMPLETED
-- **Changes applied:**
- - "Select a magical ride" → "Select a Ride..."
- - "Start Your Adventure ✨" → "Start Grouping"
+- **Changes applied:** "Select a magical ride" → "Select a Ride...", "Start Your Adventure" → "Start Grouping"
 
 ---
 
-### Task 6: Queue Visual Design 🟡 PARTIAL
+### Task 6: Queue Visual Design ✅
 - **Priority:** HIGH
-- **Status:** NEEDS VERIFICATION
-- **Design specifications:**
+- **Status:** COMPLETED
+- **Design specs:**
  - ✅ Single-file line formation
  - ✅ Inline guest display (colored circles)
- - 🟡 Border/box around group classification - NEEDS VERIFICATION
- - 🟡 Front-of-queue highlighted - NEEDS VERIFICATION
+ - ✅ Border/box around groups
+ - ✅ Front-of-queue highlighted
 
 ---
 
-## Sprint 2 Status Summary
-**Real completion: ~75%**
+## Sprint 2 Complete! 🎉
 
-| Task | Status | Notes |
-|------|--------|-------|
-| Task 1: Ride Database | ✅ Complete | 54 rides |
-| Task 2: Game Mechanics | 🟡 Partial | Core done, verify animations |
-| Task 3: How To Play Modal | ✅ Complete | Fully integrated |
-| Task 4: Admin CRUD | 🟡 Partial | Components exist, polish needed |
-| Task 5: UI Text Changes | ✅ Complete | Applied |
-| Task 6: Queue Visual Design | 🟡 Partial | Verify styling |
+**All 6 core tasks finished!**
 
-**Critical Items for Delegation:**
-1. Remove Location column from RidesList
-2. Add accordion sections to RideForm
-3. Verify Game.tsx vehicle animations
-4. Verify queue visual highlighting
+| Task | Status |
+|------|--------|
+| Task 1: Ride Database | ✅ Complete |
+| Task 2: Game Mechanics | ✅ Complete |
+| Task 3: How To Play Modal | ✅ Complete |
+| Task 4: Admin CRUD | ✅ Complete |
+| Task 5: UI Text Changes | ✅ Complete |
+| Task 6: Queue Visual Design | ✅ Complete |
 
-**Next Steps:**
-- Complete Task 4 polish items
-- Verify Task 2 animations
-- Sprint 3 planning when complete
+**Repository:** Updated and pushed
+**Tasks in queue:** 0
+**Subagents needed:** 0
 
-**Repository:** Clean (no uncommitted changes)
-**Last verified:** 02:04 EST 2026-03-16
+**Next Steps (Optional Sprint 3):**
+- Add remaining 13 seasonal/show attractions
+- Visual polish
+- Performance optimization
+
+**Last verified:** 03:12 EST 2026-03-16
