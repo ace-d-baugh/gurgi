@@ -221,9 +221,8 @@ function Seat({
   startSeatIndex: number;
 }) {
   return (
-    <div className="flex items-center gap-3">
-      <span className="text-gray-400 w-16 text-sm">Row {rowIndex + 1}</span>
-      <div className="flex gap-2">
+    <div className="flex items-center justify-center gap-4">
+      <div className="flex gap-3">
         {Array.from({ length: capacity }).map((_, seatIndex) => {
           const guest = filled[seatIndex];
           return (
@@ -231,12 +230,12 @@ function Seat({
               key={seatIndex}
               data-seat-index={startSeatIndex + seatIndex}
               onClick={() => !disabled && !guest && onClick(seatIndex)}
-              className={`w-12 h-12 rounded-lg border-2 flex items-center justify-center transition-all ${
+              className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
                 guest
-                  ? 'bg-white border-green-500'
+                  ? 'bg-white border-4 border-green-500'
                   : disabled
-                  ? 'border-gray-700 bg-transparent cursor-not-allowed'
-                  : 'border-gray-600 bg-gray-800/50 cursor-pointer hover:border-blue-400 hover:bg-gray-700'
+                  ? 'border-4 border-gray-700 bg-transparent cursor-not-allowed'
+                  : 'border-4 border-gray-500 bg-gray-800/50 cursor-pointer hover:border-blue-400 hover:bg-gray-600'
               }`}
               whileHover={!disabled && !guest ? { scale: 1.05 } : {}}
               whileTap={!disabled && !guest ? { scale: 0.95 } : {}}
@@ -523,7 +522,7 @@ export default function Game() {
   }
 
   // Calculate vehicle rows from ride config
-  const rows = Array.isArray(ride.guests[0]) ? ride.guests[0] : [ride.guests];
+  const rows = Array.isArray(ride.guests[0]) ? ride.guests[0] : ride.guests;
 
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col overflow-hidden">
