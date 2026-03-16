@@ -247,6 +247,7 @@ export default function Admin() {
  <h2 className="text-3xl font-bold text-white mb-1">Rides</h2>
  <p className="text-indigo-300/60">Manage attraction configurations</p>
  </div>
+ </div>
 
  <RidesList rides={rides} locations={locations} onEdit={(ride) => { setEditingRide(ride); setShowRideForm(true); }} onDelete={(id) => setDeletingRideId(id)} isLoading={loading} />
 
