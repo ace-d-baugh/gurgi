@@ -93,13 +93,18 @@ export const RidesList: React.FC<RidesListProps> = ({
   }, [rides, searchQuery, sortField, sortDirection]);
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-amber-400/50 transition-colors"
-          />
-        </div>
-        <motion.button
+ <div className="space-y-6">
+ <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+ <motion.button
+ whileHover={{ scale: 1.02 }}
+ whileTap={{ scale: 0.98 }}
+ onClick={onCreate}
+ className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-white font-medium shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center gap-2"
+ >
+ <Plus className="w-5 h-5" />
+ Add New Ride
+ </motion.button>
+ </div>
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={onCreate}
