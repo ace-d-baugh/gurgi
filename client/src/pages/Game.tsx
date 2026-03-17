@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Info } from 'lucide-react';
 import { rideApi, gameApi } from '../services/api';
 import { Ride, Guest } from '../types';
 import HowToPlayModal from '../components/game/HowToPlayModal';
@@ -74,6 +75,12 @@ function SlideMenu({ isOpen, onClose, onHowToPlay }: { isOpen: boolean; onClose:
  <span>📖</span> How to Play
  </button>
  <div className="border-t border-gray-700 my-2" />
+ <button
+ onClick={() => { onClose(); navigate('/about'); }}
+ className="w-full text-left px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg transition-colors flex items-center gap-3"
+ >
+ <span>ℹ️</span> About
+ </button>
  <button
  onClick={() => navigate('/')}
  className="w-full text-left px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg transition-colors flex items-center gap-3"
@@ -398,7 +405,7 @@ export default function Game() {
  setActiveGroupIndex(groupIndex);
  }, [groups, discoveredGroups, completedGroups]);
 
- // Handle guest selection from active group
+ // Handle guest selection - allow selecting from ANY discovered group
  const handleGuestClick = useCallback((guest: Guest) => {
  if (selectedGuest?.id === guest.id) {
  setSelectedGuest(null);
@@ -468,17 +475,11 @@ export default function Game() {
  const group = newGroups[groupIndex];
  group.guests = group.guests.filter(g => g.id !== guest.id);
 
- // If group is now empty, mark it as completed and enable next group
+ // If group is now empty, mark it as completed but NO auto-unlock
  if (group.guests.length === 0) {
  setCompletedGroups(prevCompleted => new Set([...prevCompleted, groupIndex]));
  setActiveGroupIndex(null);
- // Discover next group automatically if exists
- if (newGroups.length > groupIndex + 1) {
- setTimeout(() => {
- setDiscoveredGroups(prevDisc => new Set([...prevDisc, groupIndex + 1]));
- setActiveGroupIndex(groupIndex + 1);
- }, 300);
- }
+ // Trainee MUST manually click '?' to discover next group
  // Remove empty group after animation
  newGroups.splice(groupIndex, 1);
  }
@@ -620,9 +621,6 @@ export default function Game() {
  <div className="w-full lg:w-2/5 xl:w-1/3 bg-gray-800/50 p-4 lg:p-6 overflow-y-auto z-10 backdrop-blur flex-shrink-0 transition-all duration-300">
  <div className="flex items-center justify-between mb-4 lg:mb-6">
  <h3 className="text-lg lg:text-xl font-semibold text-blue-300">Guest Queue</h3>
- <span className="text-sm text-gray-400 bg-gray-700/50 px-2 py-1 rounded-full">
- {groups.filter(g => !completedGroups.has(groups.indexOf(g))).length} waiting
- </span>
  </div>
 
  {/* Queue Flow: Responsive grid with fly-in animations */}
@@ -665,7 +663,7 @@ export default function Game() {
  <DiscoveredGroup
  group={group}
  groupIndex={index}
- active={isActive}
+ active={isDiscovered}
  selectedGuestId={selectedGuest?.id || null}
  onGuestClick={handleGuestClick}
  />
@@ -685,18 +683,6 @@ export default function Game() {
  )}
  </div>
 
- {/* Instructions */}
- <div className="mt-6 p-4 bg-gray-700/50 rounded-lg">
- <p className="text-sm text-gray-300">
- <strong className="text-white">How to play:</strong>
- </p>
- <ol className="text-sm text-gray-400 mt-2 space-y-1 list-decimal list-inside">
- <li>Tap the <strong>mystery group</strong> (?) at the front to reveal</li>
- <li>Tap an <strong>individual</strong> to select them</li>
- <li>Tap a <strong>seat</strong> in the vehicle to load them</li>
- <li>When full or ready, click <strong>Send It!</strong></li>
- </ol>
- </div>
  </div>
 
  {/* Vehicle Area - Side on Desktop, Below on Mobile */}
