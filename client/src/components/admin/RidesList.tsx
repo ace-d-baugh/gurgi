@@ -163,19 +163,19 @@ export const RidesList: React.FC<RidesListProps> = ({
  whileHover={{ scale: 1.1 }}
  whileTap={{ scale: 0.95 }}
  onClick={() => onEdit(ride)}
- className="p-2 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 transition-colors"
+ className="p-2.5 rounded-lg bg-indigo-500/40 hover:bg-indigo-500/60 active:bg-indigo-500/80 text-indigo-200 hover:text-white transition-all"
  title="Edit ride"
  >
- <Pencil className="w-4 h-4" />
+ <Pencil className="w-5 h-5" />
  </motion.button>
  <motion.button
  whileHover={{ scale: 1.1 }}
  whileTap={{ scale: 0.95 }}
  onClick={() => onDelete(ride._id)}
- className="p-2 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300 transition-colors"
+ className="p-2.5 rounded-lg bg-red-500/40 hover:bg-red-500/60 active:bg-red-500/80 text-red-200 hover:text-white transition-all"
  title="Delete ride"
  >
- <Trash2 className="w-4 h-4" />
+ <Trash2 className="w-5 h-5" />
  </motion.button>
  </div>
  </motion.div>
