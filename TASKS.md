@@ -69,7 +69,7 @@
 
 | # | Task | Status | Priority |
 |---|------|--------|----------|
-| 27 | Fix How to Play X button to close popup | ⏳ | Critical |
+| 27 | Fix How to Play X button to close popup | ✅ | Critical |
 | 28 | Move How to Play + Administration links to hamburger menu | ⏳ | Critical |
 | 29 | Create About page from README/PRD | ⏳ | Medium |
 | 30 | Fix park re-click - dropdown should reload not disappear | ⏳ | Critical |
