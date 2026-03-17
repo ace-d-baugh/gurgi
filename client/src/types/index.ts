@@ -1,7 +1,8 @@
 export interface Location {
-  _id: string;
-  name: string;
-  slug: string;
+ _id: string;
+ name: string;
+ slug: string;
+ isActive?: boolean;
 }
 
 export interface Ride {

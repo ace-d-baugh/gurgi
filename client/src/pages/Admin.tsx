@@ -168,7 +168,7 @@ export default function Admin() {
  const navigation = [
  { id: 'rides' as Tab, label: 'Rides', icon: Ticket, count: rides.length },
  { id: 'locations' as Tab, label: 'Locations', icon: MapPin, count: locations.length },
- { id: 'stats' as Tab, label: 'Statistics', icon: TrendingUp },
+ 
  ];
 
  if (!isAuthenticated) {
@@ -272,25 +272,7 @@ export default function Admin() {
  </motion.div>
  )}
 
- {activeTab === 'stats' && (
- <motion.div key="stats" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="max-w-5xl mx-auto">
- <h2 className="text-3xl font-bold text-white mb-6">Statistics Overview</h2>
- <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
- <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20">
- <div className="flex items-center justify-between mb-4"><Ticket className="w-8 h-8 text-amber-400" /><span className="text-4xl font-bold text-white">{rides.length}</span></div>
- <p className="text-indigo-300/70">Total Rides</p>
- </div>
- <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20">
- <div className="flex items-center justify-between mb-4"><MapPin className="w-8 h-8 text-purple-400" /><span className="text-4xl font-bold text-white">{locations.length}</span></div>
- <p className="text-indigo-300/70">Total Locations</p>
- </div>
- <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20">
- <div className="flex items-center justify-between mb-4"><TrendingUp className="w-8 h-8 text-green-400" /><span className="text-4xl font-bold text-white">{rides.filter(r => r.active).length}</span></div>
- <p className="text-indigo-300/70">Active Rides</p>
- </div>
- </div>
- </motion.div>
- )}
+ 
  </AnimatePresence>
  </main>
  </div>

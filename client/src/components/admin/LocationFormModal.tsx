@@ -95,9 +95,6 @@ export const LocationFormModal: React.FC<LocationFormModalProps> = ({
  className="w-full px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 focus:ring-2 focus:ring-amber-500/20 transition-all"
  autoFocus
  />
- <p className="mt-2 text-xs text-gray-500">
- URL-friendly slug will be auto-generated
- </p>
  </div>
 
  {/* Buttons */}

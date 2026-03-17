@@ -384,72 +384,27 @@ export const RideForm: React.FC<RideFormProps> = ({
  {isCorralCounter ? (
  // Corral Counter: Single "Max Capacity" input
  <div className="bg-white/5 rounded-lg p-4 border border-indigo-400/20">
- <label className="text-sm font-medium text-indigo-200 mb-2 block">
- Max Capacity
- </label>
- <input
- type="number"
- min="1"
- max="100"
- value={corralCapacity}
- onChange={(e) => setCorralCapacity(parseInt(e.target.value) || 1)}
- className="w-24 px-3 py-2 rounded-lg bg-white/10 border border-indigo-400/30 text-white text-center font-semibold focus:outline-none focus:border-indigo-400"
- />
+ <label className="text-sm font-medium text-indigo-200 mb-2 block">Max Capacity</label>
+ <input type="number" min="1" max="100" value={corralCapacity} onChange={(e) => setCorralCapacity(parseInt(e.target.value) || 1)} className="w-24 px-3 py-2 rounded-lg bg-white/10 border border-indigo-400/30 text-white text-center font-semibold focus:outline-none focus:border-indigo-400" />
  </div>
  ) : (
- // Multi-row configuration with +/- buttons
- rows.map((row, index) => (
- <motion.div
- key={index}
- initial={{ opacity: 0, y: -10 }}
- animate={{ opacity: 1, y: 0 }}
- className="bg-white/5 rounded-lg p-3 border border-indigo-400/20 flex items-center gap-3"
- >
- {/* Clickable Row Label - cycles through types */}
- <button
- type="button"
- onClick={() => cycleRowType(index)}
- className="px-3 py-2 bg-indigo-500/20 hover:bg-indigo-500/40 rounded-lg text-indigo-200 text-sm font-medium transition-colors min-w-[120px] text-center"
- >
- {getRowLabel(index)}
- </button>
-
- <div className="flex-1 flex items-center gap-2">
- <span className="text-sm text-indigo-300/70">Seats:</span>
- <input
- type="number"
- min="1"
- max="20"
- value={row.seats}
- onChange={(e) => updateRowSeats(index, parseInt(e.target.value) || 1)}
- className="w-16 px-2 py-2 rounded-lg bg-white/10 border border-indigo-400/30 text-white text-center focus:outline-none focus:border-indigo-400"
- />
+ // Multi-row configuration with + button above
+ <>
+ <div className="flex justify-end mb-2">
+ <button type="button" onClick={addRow} className="p-2 bg-green-500/20 hover:bg-green-500/40 rounded-lg text-green-300 transition-colors" title="Add row"><Plus className="w-4 h-4" /></button>
  </div>
-
- {/* Show +/- buttons only for non-Corral multi-row */}
- <div className="flex items-center gap-1">
- {index === 0 ? (
- <button
- type="button"
- onClick={addRow}
- className="p-2 bg-green-500/20 hover:bg-green-500/40 rounded-lg text-green-300 transition-colors"
- title="Add row"
- >
- <Plus className="w-4 h-4" />
- </button>
- ) : (
- <button
- type="button"
- onClick={() => removeRow(index)}
- className="p-2 bg-red-500/20 hover:bg-red-500/40 rounded-lg text-red-300 transition-colors"
- title="Remove row"
- >
- <Minus className="w-4 h-4" />
- </button>
+ <div className="space-y-3">
+ {rows.map((row, index) => (
+ <motion.div key={index} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="bg-white/5 rounded-lg p-3 border border-indigo-400/20 flex items-center gap-3">
+ <button type="button" onClick={() => cycleRowType(index)} className="px-3 py-2 bg-indigo-500/20 hover:bg-indigo-500/40 rounded-lg text-indigo-200 text-sm font-medium transition-colors min-w-[120px] text-center">{getRowLabel(index)}</button>
+ <div className="flex-1 flex items-center gap-2"><span className="text-sm text-indigo-300/70">Seats:</span><input type="number" min="1" max="20" value={row.seats} onChange={(e) => updateRowSeats(index, parseInt(e.target.value) || 1)} className="w-16 px-2 py-2 rounded-lg bg-white/10 border border-indigo-400/30 text-white text-center focus:outline-none focus:border-indigo-400" /></div>
+ {index > 0 && (
+ <div className="flex items-center gap-1"><button type="button" onClick={() => removeRow(index)} className="p-2 bg-red-500/20 hover:bg-red-500/40 rounded-lg text-red-300 transition-colors" title="Remove row"><Minus className="w-4 h-4" /></button></div>
  )}
- </div>
  </motion.div>
- ))
+ ))}
+ </div>
+ </>
  )}
  </div>
 
