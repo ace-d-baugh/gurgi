@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Search, Pencil, Trash2, ChevronUp, ChevronDown, ChevronRight } from 'lucide-react';
+import { Plus, Pencil, Trash2, ChevronUp, ChevronDown, ChevronRight } from 'lucide-react';
 import { Ride, Location } from '../../types';
 
 interface RidesListProps {
@@ -18,7 +18,6 @@ export const RidesList: React.FC<RidesListProps> = ({
  onDelete,
  onCreate,
 }) => {
- const [searchQuery, setSearchQuery] = useState('');
  const [expandedLocations, setExpandedLocations] = useState<Set<string>>(new Set());
 
  const getLocationName = (locationId: string) => {
@@ -45,28 +44,10 @@ export const RidesList: React.FC<RidesListProps> = ({
  });
  };
 
- const filteredLocations = useMemo(() => {
- if (!searchQuery) return locations;
- return locations.filter(loc => 
- loc.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
- getLocationRides(loc._id).some(r => r.name.toLowerCase().includes(searchQuery.toLowerCase()))
- );
- }, [locations, rides, searchQuery]);
-
  return (
  <div className="space-y-4">
  {/* Header with Add Button */}
  <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
- <div className="relative flex-1 w-full sm:max-w-md">
- <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50" />
- <input
- type="text"
- placeholder="Search rides by name, location..."
- value={searchQuery}
- onChange={(e) => setSearchQuery(e.target.value)}
- className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-amber-400/50 transition-colors"
- />
- </div>
  <motion.button
  whileHover={{ scale: 1.02 }}
  whileTap={{ scale: 0.98 }}
@@ -80,7 +61,7 @@ export const RidesList: React.FC<RidesListProps> = ({
 
  {/* Locations with Collapsible Rides */}
  <div className="space-y-3">
- {filteredLocations.map((location) => {
+ {locations.map((location) => {
  const locationRides = getLocationRides(location._id);
  const isExpanded = expandedLocations.has(location._id);
 
@@ -149,11 +130,11 @@ export const RidesList: React.FC<RidesListProps> = ({
  <div className="flex items-center gap-3">
  <h4 className="font-medium text-white">{ride.name}</h4>
  <span className={`px-2 py-0.5 rounded-full text-xs ${
- ride.isActive
+ ride.active
  ? 'bg-green-500/20 text-green-300 border border-green-500/30'
  : 'bg-gray-500/20 text-gray-300 border border-gray-500/30'
  }`}>
- {ride.isActive ? 'Active' : 'Inactive'}
+ {ride.active ? 'Active' : 'Inactive'}
  </span>
  </div>
  <p className="text-sm text-indigo-300/60 mt-1">{ride.rideType}</p>
@@ -193,7 +174,7 @@ export const RidesList: React.FC<RidesListProps> = ({
  {/* No Results */}
  {filteredLocations.length === 0 && (
  <div className="text-center py-12">
- <p className="text-white/50 text-lg">{searchQuery ? 'No locations match your search' : 'No locations available'}</p>
+ <p className="text-white/50 text-lg">'No locations available'</p>
  </div>
  )}
  </div>

@@ -28,7 +28,7 @@ export interface Guest {
 export interface GuestGroup {
   id: string;
   size: number;
-  isActive: boolean;
+  active: boolean;
   color?: string;
   selected?: boolean;
 }
