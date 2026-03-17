@@ -63,6 +63,11 @@ function HamburgerMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
  navigate('/');
  };
 
+ const handleAbout = () => {
+ onClose();
+ navigate('/about');
+ };
+
  return (
  <>
  <AnimatePresence>
@@ -109,6 +114,14 @@ function HamburgerMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
  <span className="font-medium">Administration</span>
  </motion.button>
  <div className="border-t border-white/10 my-4" />
+ <motion.button
+ whileHover={{ x: 5 }}
+ onClick={handleAbout}
+ className="w-full flex items-center gap-4 px-4 py-3 text-indigo-100 hover:bg-white/10 hover:text-yellow-300 rounded-xl transition-all group"
+ >
+ <span className="text-xl group-hover:scale-110 transition-transform">ℹ️</span>
+ <span className="font-medium">About</span>
+ </motion.button>
  <motion.button
  whileHover={{ x: 5 }}
  onClick={handleMainMenu}

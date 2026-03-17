@@ -44,6 +44,11 @@ export const RidesList: React.FC<RidesListProps> = ({
  });
  };
 
+ // Sort locations alphabetically by name (default)
+ const sortedLocations = useMemo(() => {
+ return [...locations].sort((a, b) => a.name.localeCompare(b.name));
+ }, [locations]);
+
  return (
  <div className="space-y-4">
  {/* Header with Add Button */}
@@ -53,7 +58,7 @@ export const RidesList: React.FC<RidesListProps> = ({
 
  {/* Locations with Collapsible Rides */}
  <div className="space-y-3">
- {locations.map((location) => {
+ {sortedLocations.map((location) => {
  const locationRides = getLocationRides(location._id);
  const isExpanded = expandedLocations.has(location._id);
 

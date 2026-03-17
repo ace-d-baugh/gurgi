@@ -25,7 +25,7 @@
 | # | Task | Status | Priority |
 | --- | --- | --- | --- |
 | 8 | Create collapsible location headers with rides underneath | ✅ Complete | Critical |
-| 9 | Maintain alphabetical sorting as default | ⏳ | Medium |
+| 9 | Maintain alphabetical sorting as default | ✅ Complete | Medium |
 
 ### Locations Page
 | # | Task | Status | Priority |
@@ -70,10 +70,10 @@
 | # | Task | Status | Priority |
 |---|------|--------|----------|
 | 27 | Fix How to Play X button to close popup | ✅ | Critical |
-| 28 | Move How to Play + Administration links to hamburger menu | ⏳ | Critical |
-| 29 | Create About page from README/PRD | ⏳ | Medium |
-| 30 | Fix park re-click - dropdown should reload not disappear | ⏳ | Critical |
-| 31 | Add About link to hamburger menu | ⏳ | Medium |
+| 28 | Move How to Play + Administration links to hamburger menu | ✅ Complete | Critical |
+| 29 | Create About page from README/PRD | ✅ Complete | Medium |
+| 30 | Fix park re-click - dropdown should reload not disappear | ✅ Complete | Critical |
+| 31 | Add About link to hamburger menu | ✅ Complete | Medium |
 
 ---
 
