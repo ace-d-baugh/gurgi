@@ -30,9 +30,9 @@
 ### Locations Page
 | # | Task | Status | Priority |
 | --- | --- | --- | --- |
-| 10 | Change locations to popup modal instead of inline editing | ⏳ | Critical |
-| 11 | Location form: show only Name field (hide slug from user) | ⏳ | Critical |
-| 12 | Remove slug column from locations table | ⏳ | Critical |
+| 10 | Change locations to popup modal instead of inline editing | ✅ Complete | Critical |
+| 11 | Location form: show only Name field (hide slug from user) | ✅ Complete | Critical |
+| 12 | Remove slug column from locations table | ✅ Complete | Critical |
 
 ### Rides Page UX
 | # | Task | Status | Priority |
