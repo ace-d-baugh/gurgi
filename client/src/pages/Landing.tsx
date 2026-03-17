@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence, AnimatePresence as AnimatePresenceType } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 import { rideApi } from '../services/api';
 import { Ride } from '../types';
 import HowToPlayModal from '../components/game/HowToPlayModal';
@@ -19,17 +20,17 @@ function FloatingParticles() {
  <motion.div
  key={i}
  className="absolute w-1 h-1 bg-yellow-400/60 rounded-full"
- initial={{ 
+ initial={{
  x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
  y: -10,
  opacity: 0
  }}
- animate={{ 
+ animate={{
  y: [null, (typeof window !== 'undefined' ? window.innerHeight : 800) + 10],
  opacity: [0, 1, 1, 0],
  scale: [0.5, 1.2, 1, 0.8]
  }}
- transition={{ 
+ transition={{
  duration: 8 + Math.random() * 4,
  repeat: Infinity,
  delay: i * 0.3,
@@ -42,6 +43,90 @@ function FloatingParticles() {
  );
 }
 
+// Hamburger Menu Component for Landing Page
+function HamburgerMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+ const navigate = useNavigate();
+ const [howToPlayOpen, setHowToPlayOpen] = useState(false);
+
+ const handleHowToPlay = () => {
+ onClose();
+ setHowToPlayOpen(true);
+ };
+
+ const handleAdmin = () => {
+ onClose();
+ navigate('/proprietor');
+ };
+
+ const handleMainMenu = () => {
+ onClose();
+ navigate('/');
+ };
+
+ return (
+ <>
+ <AnimatePresence>
+ {isOpen && (
+ <>
+ <motion.div
+ initial={{ opacity: 0 }}
+ animate={{ opacity: 1 }}
+ exit={{ opacity: 0 }}
+ onClick={onClose}
+ className="fixed inset-0 bg-black/50 z-50"
+ />
+ <motion.div
+ initial={{ x: '-100%' }}
+ animate={{ x: 0 }}
+ exit={{ x: '-100%' }}
+ transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+ className="fixed left-0 top-0 bottom-0 w-80 bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-950 border-r border-white/20 z-50 p-6 shadow-2xl"
+ >
+ <div className="flex justify-between items-center mb-8">
+ <h2 className="text-2xl font-bold text-white">Menu</h2>
+ <button 
+ onClick={onClose}
+ className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+ >
+ <X className="w-6 h-6 text-white" />
+ </button>
+ </div>
+ <nav className="space-y-3">
+ <motion.button
+ whileHover={{ x: 5 }}
+ onClick={handleHowToPlay}
+ className="w-full flex items-center gap-4 px-4 py-3 text-indigo-100 hover:bg-white/10 hover:text-yellow-300 rounded-xl transition-all group"
+ >
+ <span className="text-xl group-hover:scale-110 transition-transform">📖</span>
+ <span className="font-medium">How to Play</span>
+ </motion.button>
+ <motion.button
+ whileHover={{ x: 5 }}
+ onClick={handleAdmin}
+ className="w-full flex items-center gap-4 px-4 py-3 text-indigo-100 hover:bg-white/10 hover:text-yellow-300 rounded-xl transition-all group"
+ >
+ <span className="text-xl group-hover:scale-110 transition-transform">🔐</span>
+ <span className="font-medium">Administration</span>
+ </motion.button>
+ <div className="border-t border-white/10 my-4" />
+ <motion.button
+ whileHover={{ x: 5 }}
+ onClick={handleMainMenu}
+ className="w-full flex items-center gap-4 px-4 py-3 text-indigo-100 hover:bg-white/10 hover:text-yellow-300 rounded-xl transition-all group"
+ >
+ <span className="text-xl group-hover:scale-110 transition-transform">🏠</span>
+ <span className="font-medium">Main Menu</span>
+ </motion.button>
+ </nav>
+ </motion.div>
+ </>
+ )}
+ </AnimatePresence>
+ <HowToPlayModal isOpen={howToPlayOpen} onClose={() => setHowToPlayOpen(false)} />
+ </>
+ );
+}
+
 export default function Landing() {
  const navigate = useNavigate();
  const [selectedPark, setSelectedPark] = useState<string | null>(null);
@@ -49,26 +134,27 @@ export default function Landing() {
  const [selectedRide, setSelectedRide] = useState<Ride | null>(null);
  const [loading, setLoading] = useState(false);
  const [error, setError] = useState('');
-
- const [howToPlayOpen, setHowToPlayOpen] = useState(false);
+ const [menuOpen, setMenuOpen] = useState(false);
 
  useEffect(() => {
  if (selectedPark) {
  setLoading(true);
  setError('');
- rideApi.getAll()
- .then(res => {
- const parkRides = res.data.filter((r: Ride) => r.location?.slug === selectedPark);
- setRides(parkRides);
- if (parkRides.length === 0) {
- setError('No rides found for this park');
- }
- })
- .catch(err => {
- setError('Failed to load rides');
- console.error(err);
- })
- .finally(() => setLoading(false));
+ setSelectedRide(null); // Reset selected ride when park changes
+   
+   rideApi.getAll()
+     .then(res => {
+       const parkRides = res.data.filter((r: Ride) => r.location?.slug === selectedPark);
+       setRides(parkRides);
+       if (parkRides.length === 0) {
+         setError('No rides found for this park');
+       }
+     })
+     .catch(err => {
+       setError('Failed to load rides');
+       console.error(err);
+     })
+     .finally(() => setLoading(false));
  }
  }, [selectedPark]);
 
@@ -78,9 +164,52 @@ export default function Landing() {
  }
  };
 
+ // TASK 30: Fix park re-click - reload dropdown instead of disappearing
+ const handleParkClick = (parkSlug: string) => {
+ if (selectedPark === parkSlug) {
+ // Re-clicking same park should reload the dropdown
+ setLoading(true);
+ setError('');
+ setSelectedRide(null);
+ 
+   rideApi.getAll()
+     .then(res => {
+       const parkRides = res.data.filter((r: Ride) => r.location?.slug === parkSlug);
+       setRides(parkRides);
+       if (parkRides.length === 0) {
+         setError('No rides found for this park');
+       } else {
+         setError('');
+       }
+     })
+     .catch(err => {
+       setError('Failed to load rides');
+       console.error(err);
+     })
+     .finally(() => setLoading(false));
+ } else {
+   setSelectedPark(parkSlug);
+ }
+ };
+
  return (
  <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 relative overflow-hidden">
  <FloatingParticles />
+   
+ {/* Hamburger Menu */}
+ <HamburgerMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+   
+ {/* Header with Hamburger */}
+ <header className="fixed top-0 left-0 right-0 z-40 p-4 flex justify-between items-center bg-gradient-to-b from-black/50 to-transparent">
+ <motion.button
+ whileHover={{ scale: 1.05 }}
+ whileTap={{ scale: 0.95 }}
+ onClick={() => setMenuOpen(true)}
+ className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl hover:bg-white/20 transition-all group"
+ >
+ <Menu className="w-6 h-6 text-white group-hover:text-yellow-300 transition-colors" />
+ </motion.button>
+ </header>
  
  <div className="relative z-10 container mx-auto px-4 py-16 min-h-screen flex flex-col items-center justify-center">
  <motion.div
@@ -119,18 +248,14 @@ export default function Landing() {
  transition={{ delay: 0.1 * index, duration: 0.4 }}
  whileHover={{ scale: 1.05, y: -5 }}
  whileTap={{ scale: 0.98 }}
- onClick={() => {
- setSelectedPark(park.slug);
- setSelectedRide(null);
- setRides([]);
- }}
+ onClick={() => handleParkClick(park.slug)}
  className={`relative flex flex-col items-center p-6 rounded-2xl border-2 transition-all duration-300 ${
  selectedPark === park.slug
  ? `border-yellow-400 bg-gradient-to-br ${park.gradient} shadow-[0_0_30px_rgba(255,193,7,0.4)]`
  : 'border-white/20 bg-white/5 hover:bg-white/15 hover:border-white/40'
  }`}
  >
- <motion.span 
+ <motion.span
  className="text-4xl md:text-5xl mb-3 filter drop-shadow-lg"
  animate={{ rotate: selectedPark === park.slug ? [0, -10, 10, 0] : 0 }}
  transition={{ duration: 0.5 }}
@@ -214,38 +339,6 @@ export default function Landing() {
  )}
  </motion.div>
 </div>
-
- <motion.div
- initial={{ opacity: 0 }}
- animate={{ opacity: 1 }}
- transition={{ delay: 0.6 }}
- className="mt-8 text-center">
-
-<motion.div
-initial={{ opacity: 0 }}
-animate={{ opacity: 1 }}
-transition={{ delay: 0.6 }}
-className="mt-8 text-center flex items-center justify-center gap-6"
->
-<motion.button
-whileHover={{ scale: 1.05 }}
-whileTap={{ scale: 0.95 }}
-onClick={() => setHowToPlayOpen(true)}
-className="text-white/50 hover:text-yellow-400 text-sm transition-colors inline-flex items-center gap-2 hover:underline cursor-pointer"
->
-<span>📖</span> How to Play
-</motion.button>
-<a
-href="/proprietor"
-className="text-white/50 hover:text-yellow-400 text-sm transition-colors inline-flex items-center gap-2 hover:underline"
->
-<span>🔐</span> Administration
-</a>
-</motion.div>
-</motion.div>
-
-{/* How To Play Modal */}
-<HowToPlayModal isOpen={howToPlayOpen} onClose={() => setHowToPlayOpen(false)} />
-</div>
-);
+ </div>
+ );
 }

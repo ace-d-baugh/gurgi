@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { rideApi, gameApi } from '../services/api';
 import { Ride, Guest } from '../types';
-import HowToPlayModal from '../components/game/HowToPlayModal';
 
 // Group colors cycling through
 const GROUP_COLORS = [
@@ -36,13 +35,8 @@ interface VehicleRow {
 const generateId = () => Math.random().toString(36).substring(2, 9);
 
 // Slide Menu Component
-function SlideMenu({ isOpen, onClose, onHowToPlay }: { isOpen: boolean; onClose: () => void; onHowToPlay: () => void }) {
+function SlideMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
  const navigate = useNavigate();
-
- const handleHowToPlay = () => {
- onClose();
- onHowToPlay();
- };
 
  return (
  <AnimatePresence>
@@ -53,7 +47,7 @@ function SlideMenu({ isOpen, onClose, onHowToPlay }: { isOpen: boolean; onClose:
  animate={{ opacity: 1 }}
  exit={{ opacity: 0 }}
  onClick={onClose}
- className="fixed inset-0 bg-black/50 z-50"
+ className="fixed inset-0 bg-black/50 z-40"
  />
  <motion.div
  initial={{ x: '-100%' }}
@@ -66,19 +60,15 @@ function SlideMenu({ isOpen, onClose, onHowToPlay }: { isOpen: boolean; onClose:
  <h2 className="text-2xl font-bold text-white">Menu</h2>
  <button onClick={onClose} className="text-gray-400 hover:text-white text-2xl">×</button>
  </div>
- <nav className="space-y-3">
- <button
- onClick={handleHowToPlay}
- className="w-full text-left px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg transition-colors flex items-center gap-3"
- >
- <span>📖</span> How to Play
- </button>
- <div className="border-t border-gray-700 my-2" />
+ <nav className="space-y-4">
+ <a href="#" className="block px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg transition-colors">
+ About GURGI
+ </a>
  <button
  onClick={() => navigate('/')}
- className="w-full text-left px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg transition-colors flex items-center gap-3"
+ className="block w-full text-left px-4 py-3 text-blue-400 hover:bg-gray-800 rounded-lg transition-colors"
  >
- <span>🏠</span> Main Menu
+ Main Menu
  </button>
  </nav>
  </motion.div>
@@ -282,7 +272,6 @@ export default function Game() {
  const [loading, setLoading] = useState(true);
  const [error, setError] = useState('');
  const [menuOpen, setMenuOpen] = useState(false);
-  const [howToPlayOpen, setHowToPlayOpen] = useState(false);
  const [score, setScore] = useState({ loaded: 0, dispatched: 0 });
  const [walkingGuest, setWalkingGuest] = useState<{
  guest: Guest;
@@ -559,8 +548,7 @@ export default function Game() {
  return (
  <div className="min-h-screen bg-gray-900 text-white flex flex-col overflow-hidden">
  {/* Menu */}
- <SlideMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} onHowToPlay={() => setHowToPlayOpen(true)} />
-      <HowToPlayModal isOpen={howToPlayOpen} onClose={() => setHowToPlayOpen(false)} />
+ <SlideMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
  {/* Walking Guest Animation Layer */}
  <AnimatePresence>
