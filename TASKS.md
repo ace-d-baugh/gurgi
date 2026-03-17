@@ -37,7 +37,7 @@
 ### Rides Page UX
 | # | Task | Status | Priority |
 | --- | --- | --- | --- |
-| 13 | Make actions always visible (not hover-only) for mobile | ⏳ | Critical |
+| 13 | Make actions always visible (not hover-only) for mobile | ✅ Complete | Critical |
 
 ### Vehicle Configuration Form
 | # | Task | Status | Priority |
