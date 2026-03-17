@@ -48,15 +48,7 @@ export const RidesList: React.FC<RidesListProps> = ({
  <div className="space-y-4">
  {/* Header with Add Button */}
  <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
- <motion.button
- whileHover={{ scale: 1.02 }}
- whileTap={{ scale: 0.98 }}
- onClick={onCreate}
- className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-white font-medium shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center gap-2"
- >
- <Plus className="w-5 h-5" />
- Add New Ride
- </motion.button>
+ 
  </div>
 
  {/* Locations with Collapsible Rides */}
