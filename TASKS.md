@@ -24,7 +24,7 @@
 ### Accordion & Organization
 | # | Task | Status | Priority |
 | --- | --- | --- | --- |
-| 8 | Create collapsible location headers with rides underneath | ⏳ | Critical |
+| 8 | Create collapsible location headers with rides underneath | ✅ Complete | Critical |
 | 9 | Maintain alphabetical sorting as default | ⏳ | Medium |
 
 ### Locations Page
