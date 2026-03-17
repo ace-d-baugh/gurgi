@@ -164,7 +164,7 @@ export const RidesList: React.FC<RidesListProps> = ({
  </div>
 
  {/* No Results */}
- {filteredLocations.length === 0 && (
+ {locations.length === 0 && (
  <div className="text-center py-12">
  <p className="text-white/50 text-lg">'No locations available'</p>
  </div>
