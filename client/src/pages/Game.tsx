@@ -164,10 +164,8 @@ function DiscoveredGroup({
  key={guest.id}
  data-guest-id={active ? guest.id : undefined}
  layoutId={`guest-${guest.id}`}
- onClick={() => active && onGuestClick(guest)}
- className={`w-10 h-10 rounded-full cursor-pointer transition-all duration-200 ${
- active ? 'hover:scale-110' : 'opacity-50 cursor-not-allowed'
- }`}
+ onClick={() => onGuestClick(guest)}
+ className="w-10 h-10 rounded-full cursor-pointer transition-all duration-200 hover:scale-110"
  style={{
  backgroundColor: group.color,
  border: isSelected ? '3px solid white' : '3px solid transparent',
@@ -755,18 +753,8 @@ export default function Game() {
  {/* Vehicle Capacity Indicator - Seats as circles */}
  <div className="mt-4 flex items-center justify-between text-sm">
  <span className="text-gray-400">
- Capacity: {vehicleGuests.filter(g => g !== null).length} / {vehicleGuests.length}
+ Capacity: {vehicleGuests.filter(g => g !== null).length} / {vehicleConfig.reduce((a, b) => a + b, 0)}
  </span>
- <div className="flex gap-1">
- {vehicleGuests.map((guest, i) => (
- <div
- key={i}
- className={`w-4 h-4 rounded-full border-2 ${
- guest ? 'bg-white border-green-500' : 'bg-gray-700 border-gray-600'
- }`}
- />
- ))}
- </div>
  </div>
  </div>
  </motion.div>
