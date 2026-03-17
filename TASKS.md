@@ -42,13 +42,13 @@
 ### Vehicle Configuration Form
 | # | Task | Status | Priority |
 | --- | --- | --- | --- |
-| 14 | Redesign: "Row 1" with "Seats per Row" input | ⏳ | Critical |
-| 15 | Add "+" button to add more rows | ⏳ | Critical |
-| 16 | Add "-" button to remove rows (not on first row) | ⏳ | Critical |
-| 17 | Map to guests array [2,2,2] etc | ⏳ | Critical |
-| 18 | Ride Type Model: Click "Row 1" label to cycle through Enum types: "Stop and Go Single Vehicle", "Interval Batch Loader", "Continuous Mover", "Corral Counter", "Multiple Interval Batch Loader", "Multiple Stop and Go Single Vehicle" | ⏳ | Critical |
+| 14 | Redesign: "Row 1" with "Seats per Row" input | ✅ | Critical |
+| 15 | Add "+" button to add more rows | ✅ | Critical |
+| 16 | Add "-" button to remove rows (not on first row) | ✅ | Critical |
+| 17 | Map to guests array [2,2,2] etc | ✅ | Critical |
+| 18 | Ride Type Model: Click "Row 1" label to cycle through Enum types: "Stop and Go Single Vehicle", "Interval Batch Loader", "Continuous Mover", "Corral Counter", "Multiple Interval Batch Loader", "Multiple Stop and Go Single Vehicle" | ✅ | Critical |
 | 19 | If type is "Corral Counter" show "Max Capacity" instead of "Row 1" (single value, no +/- buttons) | ⏳ | Critical |
-| 20 | Fix Ride Type in edit form to include only enum types | ⏳ | Critical |
+| 20 | Fix Ride Type in edit form to include only enum types | ✅ | Critical |
 
 ---
 
