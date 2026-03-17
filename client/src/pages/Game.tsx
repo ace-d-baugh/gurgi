@@ -96,7 +96,7 @@ function SlideMenu({ isOpen, onClose, onHowToPlay }: { isOpen: boolean; onClose:
 }
 
 // Mystery Group Component - Shows before discovery
-function MysteryGroup({ onClick, index }: { onClick: () => void; index: number }) {
+function MysteryGroup({ onClick, index, disabled }: { onClick: () => void; index: number; disabled?: boolean }) {
  return (
  <motion.div
  layout
@@ -108,13 +108,13 @@ function MysteryGroup({ onClick, index }: { onClick: () => void; index: number }
  >
  <span className="text-xs text-gray-500 mb-1 font-medium">GROUP {index + 1}</span>
  <motion.div
- className="w-12 h-12 rounded-full cursor-pointer relative overflow-hidden"
+ className={`w-12 h-12 rounded-full relative overflow-hidden ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
  style={{
  background: 'linear-gradient(135deg, #1f2937, #374151)',
  boxShadow: '0 4px 15px rgba(0,0,0,0.3)'
  }}
- whileHover={{ scale: 1.1 }}
- whileTap={{ scale: 0.95 }}
+ whileHover={disabled ? {} : { scale: 1.1 }}
+ whileTap={disabled ? {} : { scale: 0.95 }}
  animate={{
  boxShadow: ['0 4px 15px rgba(0,0,0,0.3)', '0 4px 25px rgba(255,255,255,0.1)', '0 4px 15px rgba(0,0,0,0.3)']
  }}
@@ -278,10 +278,10 @@ export default function Game() {
 
  const [ride, setRide] = useState<Ride | null>(null);
  const [groups, setGroups] = useState<GameGroup[]>([]);
- const [activeGroupIndex, setActiveGroupIndex] = useState<number | null>(null);
+ const [activeGroupId, setActiveGroupId] = useState<string | null>(null);
  const [selectedGuest, setSelectedGuest] = useState<Guest | null>(null);
- const [discoveredGroups, setDiscoveredGroups] = useState<Set<number>>(new Set());
- const [completedGroups, setCompletedGroups] = useState<Set<number>>(new Set());
+ const [discoveredGroups, setDiscoveredGroups] = useState<Set<string>>(new Set());
+ const [completedGroups, setCompletedGroups] = useState<Set<string>>(new Set());
  const [vehicleNumber, setVehicleNumber] = useState(1);
  const [vehicleState, setVehicleState] = useState<VehicleState>('entering');
  const [vehicleGuests, setVehicleGuests] = useState<(Guest | null)[]>([]);
@@ -385,22 +385,17 @@ export default function Game() {
  return () => clearTimeout(timer);
  }, [loading, vehicleNumber]);
 
- // Handle group discovery - sequential discovery only
- const handleGroupClick = useCallback((groupIndex: number) => {
- // Sequential discovery: only allow discovery of the first undiscovered group
- // Find the smallest undiscovered group index
- const undiscoveredIndices = groups
- .map((_, idx) => idx)
- .filter(idx => !discoveredGroups.has(idx) && !completedGroups.has(idx));
+ // Handle group discovery - sequential discovery only, no auto-unlock
+ const handleGroupClick = useCallback((groupId: string) => {
+ // Find the first undiscovered group in the queue
+ const firstUndiscovered = groups.find(g => !discoveredGroups.has(g.id) && !completedGroups.has(g.id));
 
- const firstUndiscovered = undiscoveredIndices.length > 0 ? undiscoveredIndices[0] : -1;
-
- // Only allow clicking the first undiscovered group
- if (groupIndex !== firstUndiscovered) return;
+ // Only allow discovery of the first undiscovered group
+ if (!firstUndiscovered || firstUndiscovered.id !== groupId) return;
 
  // Discover the group
- setDiscoveredGroups(prev => new Set([...prev, groupIndex]));
- setActiveGroupIndex(groupIndex);
+ setDiscoveredGroups(prev => new Set([...prev, groupId]));
+ setActiveGroupId(groupId);
  }, [groups, discoveredGroups, completedGroups]);
 
  // Handle guest selection - allow selecting from ANY discovered group
@@ -473,13 +468,37 @@ export default function Game() {
  const group = newGroups[groupIndex];
  group.guests = group.guests.filter(g => g.id !== guest.id);
 
- // If group is now empty, mark it as completed but NO auto-unlock
+ // Generate a new group helper
+const generateNewGroup = () => {
+ const colorConfig = GROUP_COLORS[Math.floor(Math.random() * GROUP_COLORS.length)];
+ const groupId = generateId();
+ // Random size 1-6 for variety
+ const size = Math.floor(Math.random() * 6) + 1;
+ const groupGuests: Guest[] = Array.from({ length: size }, (_, j) => ({
+ id: `${groupId}-${j}`,
+ groupId: groupId,
+ color: colorConfig.color,
+ selected: false,
+ }));
+
+ return {
+ id: groupId,
+ color: colorConfig.color,
+ colorName: colorConfig.name,
+ guests: groupGuests,
+ discovered: false,
+ size: size,
+ };
+};
+
+// If group is now empty, mark it as completed but NO auto-unlock
  if (group.guests.length === 0) {
- setCompletedGroups(prevCompleted => new Set([...prevCompleted, groupIndex]));
- setActiveGroupIndex(null);
- // Trainee MUST manually click '?' to discover next group
- // Remove empty group after animation
+ setCompletedGroups(prevCompleted => new Set([...prevCompleted, guest.groupId]));
+ setActiveGroupId(null);
+ // Remove empty group
  newGroups.splice(groupIndex, 1);
+ // Add new undiscovered group at the end - NO auto-discovery
+ newGroups.push(generateNewGroup());
  }
  }
  return newGroups;
@@ -644,7 +663,8 @@ export default function Game() {
  >
  <MysteryGroup
  index={index}
- onClick={() => index === firstUndiscovered && handleGroupClick(index)}
+ onClick={() => firstUndiscovered && handleGroupClick(firstUndiscovered.id)}
+ disabled={!firstUndiscovered}
  />
  </motion.div>
  );
