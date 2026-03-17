@@ -93,8 +93,9 @@ function MysteryGroup({ onClick, index }: { onClick: () => void; index: number }
  return (
  <motion.div
  layout
- initial={{ opacity: 0, scale: 0.8 }}
- animate={{ opacity: 1, scale: 1 }}
+ initial={{ opacity: 0, x: -50, scale: 0.8 }}
+ animate={{ opacity: 1, x: 0, scale: 1 }}
+ transition={{ type: "spring", stiffness: 300, damping: 20, delay: index * 0.1 }}
  className="flex flex-col items-center"
  onClick={onClick}
  >
@@ -615,14 +616,17 @@ export default function Game() {
 
  {/* Main Game Area */}
  <div className="flex-1 flex flex-col lg:flex-row relative overflow-hidden">
- {/* Guest Queue - Left Side */}
- <div className="lg:w-1/3 bg-gray-800/50 p-4 overflow-y-auto z-10 backdrop-blur flex-shrink-0">
- <div className="flex items-center gap-2 mb-4">
- <h3 className="text-lg font-semibold text-blue-300">Guest Queue</h3>
+ {/* Guest Queue - Full Width on Mobile/Side on Desktop */}
+ <div className="w-full lg:w-2/5 xl:w-1/3 bg-gray-800/50 p-4 lg:p-6 overflow-y-auto z-10 backdrop-blur flex-shrink-0 transition-all duration-300">
+ <div className="flex items-center justify-between mb-4 lg:mb-6">
+ <h3 className="text-lg lg:text-xl font-semibold text-blue-300">Guest Queue</h3>
+ <span className="text-sm text-gray-400 bg-gray-700/50 px-2 py-1 rounded-full">
+ {groups.filter(g => !completedGroups.has(groups.indexOf(g))).length} waiting
+ </span>
  </div>
 
- {/* Queue Flow: Left to Right, wrapping */}
- <div className="flex flex-wrap gap-4 content-start">
+ {/* Queue Flow: Responsive grid with fly-in animations */}
+ <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-4 xl:grid-cols-3 gap-3 lg:gap-4 content-start">
  <AnimatePresence mode="popLayout">
  {groups.slice(0, 8).map((group, index) => {
  const isDiscovered = discoveredGroups.has(index);
@@ -636,11 +640,17 @@ export default function Game() {
  const firstUndiscovered = undiscoveredIndices.length > 0 ? undiscoveredIndices[0] : -1;
 
  return (
- <MysteryGroup
+ <motion.div
  key={group.id}
+ initial={{ opacity: 0, x: -30, scale: 0.9 }}
+ animate={{ opacity: 1, x: 0, scale: 1 }}
+ transition={{ type: "spring", stiffness: 250, damping: 20 }}
+ >
+ <MysteryGroup
  index={index}
  onClick={() => index === firstUndiscovered && handleGroupClick(index)}
  />
+ </motion.div>
  );
  }
 
@@ -648,6 +658,9 @@ export default function Game() {
  <motion.div
  key={group.id}
  layout
+ initial={{ opacity: 0, y: 20, scale: 0.95 }}
+ animate={{ opacity: 1, y: 0, scale: 1 }}
+ transition={{ type: "spring", stiffness: 300, damping: 25 }}
  >
  <DiscoveredGroup
  group={group}
@@ -686,8 +699,8 @@ export default function Game() {
  </div>
  </div>
 
- {/* Vehicle Area - Center/Right - TASK 26: Center vertically */}
- <div className="lg:w-2/3 relative flex flex-col items-center justify-center min-h-0">
+ {/* Vehicle Area - Side on Desktop, Below on Mobile */}
+ <div className="w-full lg:w-3/5 xl:w-2/3 relative flex flex-col items-center justify-center min-h-[300px] lg:min-h-0 bg-gray-900/50 lg:bg-transparent">
  <AnimatePresence mode="wait">
  <motion.div
  key={vehicleNumber}
