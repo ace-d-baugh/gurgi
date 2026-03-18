@@ -285,6 +285,8 @@ export default function Game() {
  const [vehicleNumber, setVehicleNumber] = useState(1);
  const [vehicleState, setVehicleState] = useState<VehicleState>('entering');
  const [vehicleGuests, setVehicleGuests] = useState<(Guest | null)[]>([]);
+ const [callForNumber, setCallForNumber] = useState<number | null>(null);
+ const [callForMessage, setCallForMessage] = useState<string | null>(null);
  const [loading, setLoading] = useState(true);
  const [error, setError] = useState('');
  const [menuOpen, setMenuOpen] = useState(false);
@@ -509,7 +511,35 @@ const generateNewGroup = () => {
  setWalkingGuest(null);
  }, [walkingGuest, vehicleGuests]);
 
- // Dispatch vehicle
+ 
+ // Handle "Call for #" functionality - TASK 37
+ const handleCallFor = useCallback((number: number) => {
+ // Search for a group of the specified size among undiscovered groups
+ const matchingGroup = groups.find(g => !discoveredGroups.has(g.id) && !completedGroups.has(g.id) && g.size === number);
+ 
+ if (matchingGroup) {
+ // Move this group to the front by rotating the groups array
+ const newGroups = [...groups];
+ const groupIndex = newGroups.findIndex(g => g.id === matchingGroup.id);
+ if (groupIndex > -1) {
+ const [group] = newGroups.splice(groupIndex, 1);
+ newGroups.unshift(group);
+ setGroups(newGroups);
+ }
+ 
+ // Discover and activate the group
+ setDiscoveredGroups(prev => new Set([...prev, matchingGroup.id]));
+ setActiveGroupId(matchingGroup.id);
+ setCallForMessage(null);
+ } else {
+ // Show no group available message
+ setCallForMessage(`No group of ${number} available.`);
+ // Clear message after 2 seconds
+ setTimeout(() => setCallForMessage(null), 2000);
+ }
+ }, [groups, discoveredGroups, completedGroups]);
+
+// Dispatch vehicle
  const handleDispatch = useCallback(() => {
  if (vehicleState !== 'loading') return;
 
@@ -616,6 +646,26 @@ const generateNewGroup = () => {
  <p className="text-sm text-gray-400">Loaded: <span className="text-green-400 font-bold">{score.loaded}</span></p>
  <p className="text-sm text-gray-400">Dispatched: <span className="text-blue-400 font-bold">{score.dispatched}</span></p>
  </div>
+ {/* TASK 37: Call for # buttons */}
+ <div className="flex items-center gap-2 mr-4">
+ {[2, 4, 6].map(num => (
+ <motion.button
+ key={num}
+ onClick={() => handleCallFor(num)}
+ disabled={vehicleState !== 'loading'}
+ className={`px-3 py-2 rounded-lg font-semibold text-sm transition-all ${
+ vehicleState === 'loading'
+ ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-lg shadow-blue-500/30'
+ : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+ }`}
+ whileHover={vehicleState === 'loading' ? { scale: 1.05 } : {}}
+ whileTap={vehicleState === 'loading' ? { scale: 0.95 } : {}}
+ >
+ Call for {num}
+ </motion.button>
+ ))}
+ </div>
+
  <motion.button
  onClick={handleDispatch}
  disabled={vehicleState !== 'loading'}
@@ -629,7 +679,18 @@ const generateNewGroup = () => {
  >
  Send It! 🚀
  </motion.button>
- </div>
+ {/* TASK 37: Call for # message display */}
+ {callForMessage && (
+ <motion.div
+ initial={{ opacity: 0, y: -20 }}
+ animate={{ opacity: 1, y: 0 }}
+ exit={{ opacity: 0, y: -20 }}
+ className="absolute top-20 left-1/2 -translate-x-1/2 bg-red-500/90 text-white px-6 py-3 rounded-lg shadow-lg z-50"
+ >
+ {callForMessage}
+ </motion.div>
+ )}
+</div>
  </header>
 
  {/* Main Game Area */}
