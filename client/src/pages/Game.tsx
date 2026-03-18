@@ -812,7 +812,6 @@ const generateNewGroup = () => {
  })}
  </AnimatePresence>
  );
- })()}
 
  {groups.length === 0 && (
  <motion.div
