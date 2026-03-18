@@ -47,7 +47,7 @@
 | 16 | Add "-" button to remove rows (not on first row) | ✅ | Critical |
 | 17 | Map to guests array [2,2,2] etc | ✅ | Critical |
 | 18 | Ride Type Model: Click "Row 1" label to cycle through Enum types: "Stop and Go Single Vehicle", "Interval Batch Loader", "Continuous Mover", "Corral Counter", "Multiple Interval Batch Loader", "Multiple Stop and Go Single Vehicle" | ✅ | Critical |
-| 19 | If type is "Corral Counter" show "Max Capacity" instead of "Row 1" (single value, no +/- buttons) | ⏳ | Critical |
+| 19 | If type is "Corral Counter" show "Max Capacity" instead of "Row 1" (single value, no +/- buttons) | ✅ Complete | Critical |
 | 20 | Fix Ride Type in edit form to include only enum types | ✅ | Critical |
 
 ---
@@ -81,7 +81,7 @@
 
 | # | Task | Status | Priority |
 |---|------|--------|----------|
-| 32 | Remove How to Play from Guest Queue sidebar | ⏳ | Critical |
+| 32 | Remove How to Play from Guest Queue sidebar | ✅ Complete | Critical |
 | 33 | Add How to Play link to hamburger menu (reuse modal) | ✅ Complete | Critical |
 | 34 | Guest queue: full view not sidebar (better animations) | ✅ Complete | Critical |
 | 35 | Background particles: Change color every 3 seconds (gold → bronze → copper → yellow → gold) | ⏳ | Low |
