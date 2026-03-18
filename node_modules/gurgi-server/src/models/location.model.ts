@@ -3,7 +3,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface ILocation extends Document {
  name: string;
  slug: string;
- active: boolean;
+ isActive: boolean;
  createdAt: Date;
  updatedAt: Date;
 }
@@ -11,7 +11,7 @@ export interface ILocation extends Document {
 const LocationSchema = new Schema<ILocation>({
  name: { type: String, required: true, unique: true },
  slug: { type: String, required: true, unique: true },
- active: { type: Boolean, default: true }
+ isActive: { type: Boolean, default: true }
 }, { timestamps: true });
 
 LocationSchema.pre('save', function(next) {

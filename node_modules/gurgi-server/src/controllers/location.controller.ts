@@ -5,7 +5,7 @@ export const locationController = {
  // Get all locations
  getAllLocations: async (req: Request, res: Response) => {
  try {
- const locations = await Location.find({ active: true }).sort({ name: 1 });
+ const locations = await Location.find({ isActive: true }).sort({ name: 1 });
  res.json(locations);
  } catch (error) {
  res.status(500).json({ error: 'Failed to fetch locations' });
@@ -63,7 +63,7 @@ export const locationController = {
  deleteLocation: async (req: Request, res: Response) => {
  try {
  const { id } = req.params;
- await Location.findByIdAndUpdate(id, { active: false });
+ await Location.findByIdAndUpdate(id, { isActive: false });
  res.json({ message: 'Location deleted successfully' });
  } catch (error) {
  res.status(500).json({ error: 'Failed to delete location' });

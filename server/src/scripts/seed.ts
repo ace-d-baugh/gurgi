@@ -47,610 +47,417 @@ const locations = [
 const magicKingdomRides: any[] = [
   {
     name: 'Astro Orbiter',
-    description: 'A stop and go single vehicle ride at Magic Kingdom.',
     rideType: 'Stop and Go Single Vehicle',
-    width: 2,
-    rows: 12,
-    height: 4.5,
-    capacity: 24,
     guests: [2,2,2,2,2,2,2,2,2,2,2,2],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Barnstormer',
-    description: 'A interval batch loader ride at Magic Kingdom.',
     rideType: 'Interval Batch Loader',
-    width: 2,
-    rows: 8,
-    height: 4.5,
-    capacity: 16,
     guests: [2,2,2,2,2,2,2,2],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'Big Thunder Mountain',
-    description: 'A interval batch loader ride at Magic Kingdom.',
     rideType: 'Interval Batch Loader',
-    width: 2,
-    rows: 15,
-    height: 4.5,
-    capacity: 30,
     guests: [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'Buzz Lightyear’s Space Ranger Spin',
-    description: 'A continuous mover ride at Magic Kingdom.',
     rideType: 'Continuous Mover',
-    width: 2,
-    rows: 1,
-    height: 4.5,
-    capacity: 2,
     guests: [2],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Dumbo',
-    description: 'A stop and go single vehicle ride at Magic Kingdom.',
     rideType: 'Stop and Go Single Vehicle',
-    width: 2,
-    rows: 16,
-    height: 4.5,
-    capacity: 32,
     guests: [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'it’s a small world',
-    description: 'A interval batch loader ride at Magic Kingdom.',
     rideType: 'Interval Batch Loader',
-    width: 4,
-    rows: 6,
-    height: 4.5,
-    capacity: 23,
     guests: [4,4,4,4,4,3],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'Jungle Cruise Port',
-    description: 'A interval batch loader ride at Magic Kingdom.',
     rideType: 'Interval Batch Loader',
-    width: 14,
-    rows: 1,
-    height: 4.5,
-    capacity: 14,
     guests: [14],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Jungle Cruise Starboard',
-    description: 'A interval batch loader ride at Magic Kingdom.',
     rideType: 'Interval Batch Loader',
-    width: 16,
-    rows: 1,
-    height: 4.5,
-    capacity: 16,
     guests: [16],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Mad Tea Party',
-    description: 'A stop and go single vehicle ride at Magic Kingdom.',
     rideType: 'Stop and Go Single Vehicle',
-    width: 4,
-    rows: 18,
-    height: 4.5,
-    capacity: 72,
     guests: [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Magic Carpets of Aladdin',
-    description: 'A stop and go single vehicle ride at Magic Kingdom.',
     rideType: 'Stop and Go Single Vehicle',
-    width: 4,
-    rows: 16,
-    height: 4.5,
-    capacity: 64,
     guests: [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Peter Pan’s Flight',
-    description: 'A continuous mover ride at Magic Kingdom.',
     rideType: 'Continuous Mover',
-    width: 3,
-    rows: 1,
-    height: 4.5,
-    capacity: 3,
     guests: [3],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Pirates of the Caribbean',
-    description: 'A interval batch loader ride at Magic Kingdom.',
     rideType: 'Interval Batch Loader',
-    width: 4,
-    rows: 6,
-    height: 4.5,
-    capacity: 23,
     guests: [4,4,4,4,4,3],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'Prince Charming Regal Carrousel',
-    description: 'A corral counter ride at Magic Kingdom.',
     rideType: 'Corral Counter',
-    width: 90,
-    rows: 1,
-    height: 4.5,
-    capacity: 90,
     guests: [90],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Seven Dwarfs Mine Train',
-    description: 'A interval batch loader ride at Magic Kingdom.',
     rideType: 'Interval Batch Loader',
-    width: 2,
-    rows: 10,
-    height: 4.5,
-    capacity: 20,
     guests: [2,2,2,2,2,2,2,2,2,2],
     evenOddLines: true,
     singleRiders: false,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'Space Mountain',
-    description: 'A interval batch loader ride at Magic Kingdom.',
     rideType: 'Interval Batch Loader',
-    width: 6,
-    rows: 2,
-    height: 4.5,
-    capacity: 12,
     guests: [6,6],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'Tiana’s Bayou Adventure',
-    description: 'A interval batch loader ride at Magic Kingdom.',
     rideType: 'Interval Batch Loader',
-    width: 2,
-    rows: 12,
-    height: 4.5,
-    capacity: 24,
     guests: [2,2,2,2,2,2,2,2,2,2,2,2],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Tomorrowland Speedway',
-    description: 'A interval batch loader ride at Magic Kingdom.',
     rideType: 'Interval Batch Loader',
-    width: 2,
-    rows: 12,
-    height: 4.5,
-    capacity: 24,
     guests: [2,2,2,2,2,2,2,2,2,2,2,2],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'TRON Lightcycle / Run',
-    description: 'A interval batch loader ride at Magic Kingdom.',
     rideType: 'Interval Batch Loader',
-    width: 2,
-    rows: 7,
-    height: 4.5,
-    capacity: 14,
     guests: [2,2,2,2,2,2,2],
     evenOddLines: true,
     singleRiders: false,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
 ];
 
 const epcotRides: any[] = [
   {
     name: 'Frozen Ever After',
-    description: 'A interval batch loader ride at EPCOT.',
     rideType: 'Interval Batch Loader',
-    width: 4,
-    rows: 4,
-    height: 4.5,
-    capacity: 16,
     guests: [4,4,4,4],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'Gran Fiesta Tour',
-    description: 'A interval batch loader ride at EPCOT.',
     rideType: 'Interval Batch Loader',
-    width: 4,
-    rows: 5,
-    height: 4.5,
-    capacity: 19,
     guests: [4,4,4,4,3],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'Guardians of the Galaxy: Cosmic Rewind',
-    description: 'A interval batch loader ride at EPCOT.',
     rideType: 'Interval Batch Loader',
-    width: 2,
-    rows: 10,
-    height: 4.5,
-    capacity: 20,
     guests: [2,2,2,2,2,2,2,2,2,2],
     evenOddLines: true,
     singleRiders: false,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'Journey Into Imagination with Figment',
-    description: 'A interval batch loader ride at EPCOT.',
     rideType: 'Interval Batch Loader',
-    width: 4,
-    rows: 8,
-    height: 4.5,
-    capacity: 28,
     guests: [3,4,3,4,3,4,3,4],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'Living with the Land',
-    description: 'A interval batch loader ride at EPCOT.',
     rideType: 'Interval Batch Loader',
-    width: 4,
-    rows: 10,
-    height: 4.5,
-    capacity: 40,
     guests: [4,4,4,4,4,4,4,4,4,4],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'Mission: SPACE',
-    description: 'A multiple interval batch loader ride at EPCOT.',
     rideType: 'Multiple Interval Batch Loader',
-    width: 4,
-    rows: 10,
-    height: 4.5,
-    capacity: 40,
     guests: [4,4,4,4,4,4,4,4,4,4],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Remy’s Ratatouille Adventure',
-    description: 'A multiple interval batch loader ride at EPCOT.',
     rideType: 'Multiple Interval Batch Loader',
-    width: 3,
-    rows: 6,
-    height: 4.5,
-    capacity: 18,
     guests: [3,3,3,3,3,3],
     evenOddLines: false,
     singleRiders: true,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'The Seas with Nemo and Friends',
-    description: 'A continuous mover ride at EPCOT.',
     rideType: 'Continuous Mover',
-    width: 3,
-    rows: 1,
-    height: 4.5,
-    capacity: 3,
     guests: [3],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Soarin’ Wing',
-    description: 'A stop and go single vehicle ride at EPCOT.',
     rideType: 'Stop and Go Single Vehicle',
-    width: 10,
-    rows: 3,
-    height: 4.5,
-    capacity: 27,
     guests: [10,10,7],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Soarin’ Middle',
-    description: 'A stop and go single vehicle ride at EPCOT.',
     rideType: 'Stop and Go Single Vehicle',
-    width: 11,
-    rows: 3,
-    height: 4.5,
-    capacity: 33,
     guests: [11,11,11],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Spaceship Earth',
-    description: 'A continuous mover ride at EPCOT.',
     rideType: 'Continuous Mover',
-    width: 2,
-    rows: 2,
-    height: 4.5,
-    capacity: 4,
     guests: [2,2],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Test Track',
-    description: 'A interval batch loader ride at EPCOT.',
     rideType: 'Interval Batch Loader',
-    width: 3,
-    rows: 8,
-    height: 4.5,
-    capacity: 24,
     guests: [3,3,3,3,3,3,3,3],
     evenOddLines: false,
     singleRiders: true,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
 ];
 
 const hollywoodRides: any[] = [
   {
     name: 'Alien Swirling Saucers',
-    description: 'A multiple stop and go single vehicle ride at Disney’s Hollywood Studios.',
     rideType: 'Multiple Stop and Go Single Vehicle',
-    width: 3,
-    rows: 11,
-    height: 4.5,
-    capacity: 33,
     guests: [3,3,3,3,3,3,3,3,3,3,3],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Mickey and Minnie’s Runaway Railway',
-    description: 'A interval batch loader ride at Disney’s Hollywood Studios.',
     rideType: 'Interval Batch Loader',
-    width: 4,
-    rows: 8,
-    height: 4.5,
-    capacity: 32,
     guests: [4,4,4,4,4,4,4,4],
     evenOddLines: false,
     singleRiders: true,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'Millennium Falcon: Smugglers Run',
-    description: 'A interval batch loader ride at Disney’s Hollywood Studios.',
     rideType: 'Interval Batch Loader',
-    width: 2,
-    rows: 3,
-    height: 4.5,
-    capacity: 6,
     guests: [2,2,2],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Rockin’ Rollercoaster',
-    description: 'A interval batch loader ride at Disney’s Hollywood Studios.',
     rideType: 'Interval Batch Loader',
-    width: 2,
-    rows: 12,
-    height: 4.5,
-    capacity: 24,
     guests: [2,2,2,2,2,2,2,2,2,2,2,2],
     evenOddLines: false,
     singleRiders: true,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'Slinky Dog Dash',
-    description: 'A interval batch loader ride at Disney’s Hollywood Studios.',
     rideType: 'Interval Batch Loader',
-    width: 2,
-    rows: 9,
-    height: 4.5,
-    capacity: 18,
     guests: [2,2,2,2,2,2,2,2,2],
     evenOddLines: true,
     singleRiders: false,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'Star Tours',
-    description: 'A stop and go single vehicle ride at Disney’s Hollywood Studios.',
     rideType: 'Stop and Go Single Vehicle',
-    width: 9,
-    rows: 5,
-    height: 4.5,
-    capacity: 40,
     guests: [8,8,7,8,9],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Star Wars: Rise of the Resistance',
-    description: 'A interval batch loader ride at Disney’s Hollywood Studios.',
     rideType: 'Interval Batch Loader',
-    width: 4,
-    rows: 4,
-    height: 4.5,
-    capacity: 16,
     guests: [4,4,4,4],
     evenOddLines: false,
     singleRiders: true,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Toy Story Mania!',
-    description: 'A interval batch loader ride at Disney’s Hollywood Studios.',
     rideType: 'Interval Batch Loader',
-    width: 2,
-    rows: 8,
-    height: 4.5,
-    capacity: 16,
     guests: [2,2,2,2,2,2,2,2],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'The Twilight Zone Tower of Terror',
-    description: 'A multiple interval batch loader ride at Disney’s Hollywood Studios.',
     rideType: 'Multiple Interval Batch Loader',
-    width: 4,
-    rows: 6,
-    height: 4.5,
-    capacity: 21,
     guests: [3,4,3,4,3,4],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
 ];
 
 const animalKingdomRides: any[] = [
   {
     name: 'Avatar Flight of Passage',
-    description: 'A multiple interval batch loader ride at Disney’s Animal Kingdom.',
     rideType: 'Multiple Interval Batch Loader',
-    width: 8,
-    rows: 2,
-    height: 4.5,
-    capacity: 16,
     guests: [8,8],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Dinosaur',
-    description: 'A multiple batch interval loader ride at Disney’s Animal Kingdom.',
     rideType: 'Multiple Interval Batch Loader',
-    width: 4,
-    rows: 3,
-    height: 4.5,
-    capacity: 12,
     guests: [4,4,4],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'Expedition Everest',
-    description: 'A interval batch loader ride at Disney’s Animal Kingdom.',
     rideType: 'Interval Batch Loader',
-    width: 2,
-    rows: 17,
-    height: 4.5,
-    capacity: 34,
     guests: [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
     evenOddLines: false,
     singleRiders: true,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'Indiana Jones',
-    description: 'A multiple batch interval loader ride at Disney’s Animal Kingdom.',
     rideType: 'Multiple Interval Batch Loader',
-    width: 4,
-    rows: 3,
-    height: 4.5,
-    capacity: 12,
     guests: [4,4,4],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
   {
     name: 'Kali River Rapids',
-    description: 'A continuous mover ride at Disney’s Animal Kingdom.',
     rideType: 'Continuous Mover',
-    width: 12,
-    rows: 1,
-    height: 4.5,
-    capacity: 12,
     guests: [12],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: false
+    doubleGrouping: false,
+    active: true
   },
   {
     name: 'Kilimanjaro Safaris',
-    description: 'A interval batch loader ride at Disney’s Animal Kingdom.',
     rideType: 'Interval Batch Loader',
-    width: 5,
-    rows: 9,
-    height: 4.5,
-    capacity: 45,
     guests: [5,5,5,5,5,5,5,5,5],
     evenOddLines: false,
     singleRiders: false,
-    doubleGrouping: true
-  },
-  {
-    name: 'EPCOT',
-    description: 'A interval batch loader ride at Disney’s Animal Kingdom.',
-    rideType: 'Interval Batch Loader',
-    width: 4,
-    rows: 3,
-    height: 4.5,
-    capacity: 12,
-    guests: [4,4,4],
-    evenOddLines: false,
-    singleRiders: false,
-    doubleGrouping: true
+    doubleGrouping: true,
+    active: true
   },
 ];
 
