@@ -285,6 +285,8 @@ export default function Game() {
  const [vehicleNumber, setVehicleNumber] = useState(1);
  const [vehicleState, setVehicleState] = useState<VehicleState>('entering');
  const [vehicleGuests, setVehicleGuests] = useState<(Guest | null)[]>([]);
+ const [singleRiders, setSingleRiders] = useState<GameGroup[]>([]);
+ const [showSingleRiders, setShowSingleRiders] = useState(false);
  const [callForNumber, setCallForNumber] = useState<number | null>(null);
  const [callForMessage, setCallForMessage] = useState<string | null>(null);
  const [loading, setLoading] = useState(true);
