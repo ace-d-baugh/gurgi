@@ -5,6 +5,7 @@ import { Menu, X } from 'lucide-react';
 import { rideApi } from '../services/api';
 import { Ride } from '../types';
 import HowToPlayModal from '../components/game/HowToPlayModal';
+import GameOptionsPopup, { GameOptions } from '../components/game/GameOptionsPopup';
 
 const parks = [
  { name: 'Magic Kingdom', slug: 'magic-kingdom', icon: '🏰', gradient: 'from-blue-500 via-purple-500 to-pink-500' },

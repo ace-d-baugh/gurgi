@@ -92,7 +92,7 @@
 
 | # | Task | Status | Priority |
 |---|------|--------|----------|
-| 36 | Game options popup (scenario configuration) | ⏳ | High |
+| 36 | Game options popup (scenario configuration) | ✅ Complete | High |
 | 37 | "Call for #" functionality | ⏳ | High |
 | 38 | Single rider line support | ⏳ | High |
 | 39 | Automatic dispatch timer | ⏳ | Medium |
