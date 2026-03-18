@@ -714,6 +714,7 @@ const generateNewGroup = () => {
  // Find the first undiscovered group by ID
  // TASK 24: Allow any undiscovered group to be discovered
  const isCompleted = completedGroups.has(group.id);
+              const firstUndiscovered = groups.find(g => !discoveredGroups.has(g.id) && !completedGroups.has(g.id));
  const isFirst = firstUndiscovered?.id === group.id;
 
  return (
