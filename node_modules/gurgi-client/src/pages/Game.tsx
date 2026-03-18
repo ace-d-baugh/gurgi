@@ -55,7 +55,7 @@ function BackgroundParticles({ locationSlug }: { locationSlug?: string }) {
  boxShadow: `0 0 6px ${currentColor}`,
  }}
  animate={{
- y: ['100vh', '-10px'],
+ y: ['100vh', '-5vh'],
  opacity: [0, 1, 1, 0],
  }}
  transition={{
