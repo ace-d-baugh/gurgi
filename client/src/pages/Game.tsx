@@ -793,12 +793,6 @@ const generateNewGroup = () => {
  );
  }
  return (
- />
- </motion.div>
- );
- }
-
- return (
  <motion.div
  key={group.id}
  layout
