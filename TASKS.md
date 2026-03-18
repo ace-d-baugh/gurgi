@@ -84,7 +84,7 @@
 | 32 | Remove How to Play from Guest Queue sidebar | ✅ Complete | Critical |
 | 33 | Add How to Play link to hamburger menu (reuse modal) | ✅ Complete | Critical |
 | 34 | Guest queue: full view not sidebar (better animations) | ✅ Complete | Critical |
-| 35 | Background particles: Change color every 3 seconds (gold → bronze → copper → yellow → gold) | ⏳ | Low |
+| 35 | Background particles: Change color every 3 seconds based on park | ✅ Complete | Low |
 
 ---
 
@@ -130,4 +130,4 @@ All slugs auto-generated from name, NEVER manually entered by user.
 **Medium/Low:** 4
 **Total Remaining:** 42
 
-Last Updated: 2026-03-16
+Last Updated: 2026-03-18

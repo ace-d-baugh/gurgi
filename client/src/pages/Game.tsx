@@ -16,6 +16,61 @@ const GROUP_COLORS = [
  { color: '#8B5CF6', name: 'Purple', shade: 'purple' },
 ];
 
+// Location-based particle color themes
+const LOCATION_PARTICLE_COLORS: Record<string, string[]> = {
+ 'magic-kingdom': ['rgba(255, 193, 7, 0.6)', 'rgba(205, 127, 50, 0.6)', 'rgba(184, 115, 51, 0.6)', 'rgba(255, 223, 0, 0.6)', 'rgba(218, 165, 32, 0.6)'],
+ 'epcot': ['rgba(0, 150, 255, 0.6)', 'rgba(0, 200, 255, 0.6)', 'rgba(100, 180, 255, 0.6)', 'rgba(50, 170, 220, 0.5)', 'rgba(0, 150, 255, 0.6)'],
+ 'hollywood-studios': ['rgba(255, 140, 0, 0.6)', 'rgba(255, 69, 0, 0.6)', 'rgba(220, 20, 60, 0.6)', 'rgba(255, 99, 71, 0.6)', 'rgba(255, 140, 0, 0.6)'],
+ 'animal-kingdom': ['rgba(34, 139, 34, 0.6)', 'rgba(50, 205, 50, 0.6)', 'rgba(107, 142, 35, 0.6)', 'rgba(154, 205, 50, 0.6)', 'rgba(34, 139, 34, 0.6)'],
+ 'default': ['rgba(255, 193, 7, 0.6)', 'rgba(205, 127, 50, 0.6)', 'rgba(184, 115, 51, 0.6)', 'rgba(255, 223, 0, 0.6)', 'rgba(218, 165, 32, 0.6)'],
+};
+
+function BackgroundParticles({ locationSlug }: { locationSlug?: string }) {
+ const colors = LOCATION_PARTICLE_COLORS[locationSlug || 'default'] || LOCATION_PARTICLE_COLORS.default;
+ const [colorIndex, setColorIndex] = useState(0);
+
+ useEffect(() => {
+ const interval = setInterval(() => {
+ setColorIndex((prev) => (prev + 1) % colors.length);
+ }, 3000);
+ return () => clearInterval(interval);
+ }, [colors.length]);
+
+ const currentColor = colors[colorIndex];
+ const nextColor = colors[(colorIndex + 1) % colors.length];
+
+ return (
+ <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+ {[...Array(30)].map((_, i) => {
+ const delay = i * 0.5;
+ const duration = 15 + (i % 10);
+ const left = (i * 3.33) % 100;
+ return (
+ <motion.div
+ key={i}
+ className="particle"
+ style={{
+ left: `${left}%`,
+ background: `linear-gradient(to top, ${currentColor}, ${nextColor})`,
+ boxShadow: `0 0 6px ${currentColor}`,
+ }}
+ animate={{
+ y: ['100vh', '-10px'],
+ opacity: [0, 1, 1, 0],
+ }}
+ transition={{
+ duration,
+ repeat: Infinity,
+ delay,
+ ease: 'linear',
+ }}
+ />
+ );
+ })}
+ </div>
+ );
+}
+
 // Types
 type VehicleState = 'entering' | 'loading' | 'ready' | 'exiting' | 'exited';
 
@@ -698,10 +753,13 @@ const generateNewGroup = () => {
 </div>
  </header>
 
- {/* Main Game Area */}
- <div className="flex-1 flex flex-col lg:flex-row relative overflow-hidden">
- {/* Guest Queue - Full Width on Mobile/Side on Desktop */}
- <div className="w-full lg:w-2/5 xl:w-1/3 bg-gray-800/50 p-4 lg:p-6 overflow-y-auto z-10 backdrop-blur flex-shrink-0 transition-all duration-300">
+ {/* Background Particles */}
+ <BackgroundParticles locationSlug={ride?.location?.slug} />
+
+ {/* Main Game Area - Full View Layout */}
+ <div className="flex-1 relative overflow-hidden flex items-center justify-center">
+ {/* Guest Queue - Centered Full View */}
+ <div className="w-full max-w-4xl mx-auto p-4 lg:p-8 z-10">
  <div className="flex items-center justify-between mb-4 lg:mb-6">
  <h3 className="text-lg lg:text-xl font-semibold text-blue-300">Guest Queue</h3>
  </div>
@@ -774,9 +832,10 @@ const generateNewGroup = () => {
  </div>
 
  </div>
+ </div>
 
- {/* Vehicle Area - Side on Desktop, Below on Mobile */}
- <div className="w-full lg:w-3/5 xl:w-2/3 relative flex flex-col items-center justify-center min-h-[300px] lg:min-h-0 bg-gray-900/50 lg:bg-transparent">
+ {/* Vehicle Area - Floating Overlay */}
+ <div className="absolute bottom-8 right-8 lg:bottom-12 lg:right-12 z-20">
  <AnimatePresence mode="wait">
  <motion.div
  key={vehicleNumber}
