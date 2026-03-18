@@ -415,6 +415,9 @@ export default function Game() {
  const handleSeatClick = useCallback((seatIndex: number) => {
  if (!selectedGuest) return;
 
+ // CRITICAL FIX: Only place in empty seats
+ if (vehicleGuests[seatIndex] !== null) return;
+
  // Get the source element position (queue)
  const guestElement = document.querySelector(`[data-guest-id="${selectedGuest.id}"]`);
  const seatElement = document.querySelector(`[data-seat-index="${seatIndex}"]`);
@@ -445,7 +448,7 @@ export default function Game() {
  to,
  groupColor: group.color,
  });
- }, [selectedGuest, groups]);
+ }, [selectedGuest, groups, vehicleGuests]);
 
  // Complete walk animation and update state
  const completeWalkAnimation = useCallback(() => {
@@ -712,10 +715,8 @@ const generateNewGroup = () => {
 
  if (!isDiscovered) {
  // Find the first undiscovered group by ID
- // TASK 24: Allow any undiscovered group to be discovered
- const isCompleted = completedGroups.has(group.id);
-              const firstUndiscovered = groups.find(g => !discoveredGroups.has(g.id) && !completedGroups.has(g.id));
- const isFirst = firstUndiscovered?.id === group.id;
+ // CRITICAL FIX: Allow ANY undiscovered group to be clickable
+ const isClickable = !completedGroups.has(group.id);
 
  return (
  <motion.div
@@ -727,8 +728,13 @@ const generateNewGroup = () => {
  >
  <MysteryGroup
  index={index}
- onClick={() => isFirst && handleGroupClick(group.id)}
- disabled={!isFirst}
+ onClick={() => isClickable && handleGroupClick(group.id)}
+ disabled={!isClickable}
+ />
+ </motion.div>
+ );
+ }
+ return (
  />
  </motion.div>
  );
@@ -753,6 +759,8 @@ const generateNewGroup = () => {
  );
  })}
  </AnimatePresence>
+ );
+ })()}
 
  {groups.length === 0 && (
  <motion.div
