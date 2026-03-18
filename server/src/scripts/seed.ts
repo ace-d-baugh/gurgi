@@ -674,7 +674,7 @@ const seedDatabase = async () => {
     for (const loc of locations) {
       const created = await Location.create({
         ...loc,
-        active: true,
+        isActive: true,
         photoUrl: locationPhotoUrls[loc.slug] || ''
       });
       locationMap.set(loc.slug, (created as any)._id.toString());
@@ -692,7 +692,7 @@ const seedDatabase = async () => {
       await Ride.create({
         ...ride,
         location: mk,
-        active: true,
+        isActive: true,
         nameSlug: slugify(ride.name),
         photoUrl: ''
       });
@@ -702,7 +702,7 @@ const seedDatabase = async () => {
       await Ride.create({
         ...ride,
         location: epcot,
-        active: true,
+        isActive: true,
         nameSlug: slugify(ride.name),
         photoUrl: ''
       });
@@ -712,7 +712,7 @@ const seedDatabase = async () => {
       await Ride.create({
         ...ride,
         location: hollywood,
-        active: true,
+        isActive: true,
         nameSlug: slugify(ride.name),
         photoUrl: ''
       });
@@ -722,7 +722,7 @@ const seedDatabase = async () => {
       await Ride.create({
         ...ride,
         location: animal,
-        active: true,
+        isActive: true,
         nameSlug: slugify(ride.name),
         photoUrl: ''
       });

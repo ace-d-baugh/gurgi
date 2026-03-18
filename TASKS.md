@@ -59,7 +59,7 @@
 | 21 | Remove "DISCOVERED" badge from groups | ✅ Complete | | Critical |
 | 22 | Remove "FRONT" text from queue | ✅ Complete | | Critical |
 | 23 | Show seat circles (hollow/filled) not just text | ✅ Complete | | Critical |
-| 24 | Fix sequential discovery - trainees can select from any unlocked group | ⏳ | | Critical |
+| 24 | Fix sequential discovery - trainees can select from any unlocked group | ✅ Complete | Critical |
 | 25 | Fix vehicle showing all rows not just one | ✅ | Critical |
 | 26 | Center vehicle vertically on screen | ✅ | Medium |
 
@@ -83,7 +83,7 @@
 |---|------|--------|----------|
 | 32 | Remove How to Play from Guest Queue sidebar | ⏳ | Critical |
 | 33 | Add How to Play link to hamburger menu (reuse modal) | ✅ Complete | Critical |
-| 34 | Guest queue: full view not sidebar (better animations) | ⏳ | Critical |
+| 34 | Guest queue: full view not sidebar (better animations) | ✅ Complete | Critical |
 | 35 | Background particles: Change color every 3 seconds (gold → bronze → copper → yellow → gold) | ⏳ | Low |
 
 ---

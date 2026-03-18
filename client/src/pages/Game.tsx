@@ -385,13 +385,13 @@ export default function Game() {
  return () => clearTimeout(timer);
  }, [loading, vehicleNumber]);
 
- // Handle group discovery - sequential discovery only, no auto-unlock
+ // Handle group discovery - TASK 24: Allow trainees to select from ANY unlocked group
  const handleGroupClick = useCallback((groupId: string) => {
- // Find the first undiscovered group in the queue
- const firstUndiscovered = groups.find(g => !discoveredGroups.has(g.id) && !completedGroups.has(g.id));
+ // Check if group is already discovered or completed
+ if (discoveredGroups.has(groupId) || completedGroups.has(groupId)) return;
 
- // Only allow discovery of the first undiscovered group
- if (!firstUndiscovered || firstUndiscovered.id !== groupId) return;
+ // TASK 24 FIX: Allow discovering ANY undiscovered group (not just sequential)
+ // This lets trainees choose which groups to work with
 
  // Discover the group
  setDiscoveredGroups(prev => new Set([...prev, groupId]));
@@ -649,7 +649,8 @@ const generateNewGroup = () => {
 
  if (!isDiscovered) {
  // Find the first undiscovered group by ID
- const firstUndiscovered = groups.find(g => !discoveredGroups.has(g.id) && !completedGroups.has(g.id));
+ // TASK 24: Allow any undiscovered group to be discovered
+ const isCompleted = completedGroups.has(group.id);
  const isFirst = firstUndiscovered?.id === group.id;
 
  return (
