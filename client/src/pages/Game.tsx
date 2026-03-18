@@ -644,27 +644,26 @@ const generateNewGroup = () => {
  <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-4 xl:grid-cols-3 gap-3 lg:gap-4 content-start">
  <AnimatePresence mode="popLayout">
  {groups.slice(0, 8).map((group, index) => {
- const isDiscovered = discoveredGroups.has(index);
- const isActive = activeGroupIndex === index;
+ const isDiscovered = discoveredGroups.has(group.id);
+ const isActive = activeGroupId === group.id;
 
  if (!isDiscovered) {
- // Only show as clickable if it's the first undiscovered group
- const undiscoveredIndices = groups
- .map((_, idx) => idx)
- .filter(idx => !discoveredGroups.has(idx) && !completedGroups.has(idx));
- const firstUndiscovered = undiscoveredIndices.length > 0 ? undiscoveredIndices[0] : -1;
+ // Find the first undiscovered group by ID
+ const firstUndiscovered = groups.find(g => !discoveredGroups.has(g.id) && !completedGroups.has(g.id));
+ const isFirst = firstUndiscovered?.id === group.id;
 
  return (
  <motion.div
  key={group.id}
+ layout
  initial={{ opacity: 0, x: -30, scale: 0.9 }}
  animate={{ opacity: 1, x: 0, scale: 1 }}
  transition={{ type: "spring", stiffness: 250, damping: 20 }}
  >
  <MysteryGroup
  index={index}
- onClick={() => firstUndiscovered && handleGroupClick(firstUndiscovered.id)}
- disabled={!firstUndiscovered}
+ onClick={() => isFirst && handleGroupClick(group.id)}
+ disabled={!isFirst}
  />
  </motion.div>
  );
