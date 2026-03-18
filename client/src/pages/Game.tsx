@@ -895,7 +895,6 @@ const generateNewGroup = () => {
  })}
  </div>
 
- {/* Vehicle Capacity Indicator - Seats as circles */}
  <div className="mt-4 flex items-center justify-between text-sm">
  <span className="text-gray-400">
  Capacity: {vehicleGuests.filter(g => g !== null).length} / {vehicleConfig.reduce((a, b) => a + b, 0)}
