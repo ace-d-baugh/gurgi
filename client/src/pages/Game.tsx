@@ -905,6 +905,5 @@ const generateNewGroup = () => {
  </AnimatePresence>
  </div>
  </div>
- </div>
  );
 }
