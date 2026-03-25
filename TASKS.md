@@ -96,7 +96,7 @@
 | 40 | Add How to Play link to hamburger menu (reuse modal) | ✅ Complete | Critical |
 | 41 | Guest queue: full view not sidebar (better animations) | ✅ Complete | Critical |
 | 42 | Remove Background particles from Game play | ⏳ | High |
-| 43 | Allow guests queue individuals to be placed in ANY empty seat in vehicle | ⏳ | Critical | // See below for more information
+| 43 | Allow guests queue individuals to be placed in ANY empty seat in vehicle | ✅ Complete | Critical | // See below for more information
  
 ---
  
