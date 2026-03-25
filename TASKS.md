@@ -46,7 +46,7 @@
 | # | Task | Status | Priority |
 |---|------|--------|----------|
 | 11 | Remove Background particles from Game play | ⏳ | High |
-| 12 | Allow guests queue individuals to be placed in ANY empty seat in vehicle | ⏳ | Critical | // See below for more information
+| 12 | Allow guests queue individuals to be placed in ANY empty row of the pre-load area, up to the number of seats in the row | ⏳ | Critical | // See below for more information
  
 ---
  
@@ -196,13 +196,13 @@ Currently, the guests queue is limited to being placed in the first row of seats
  
 #### Solution
  
-The solution is to allow the guests queue individuals to be placed in any empty seat in any row in the vehicle. This will allow for more flexibility in the guest queue and allow for a more dynamic experience.
+The solution is to allow the guests to be placed in any pre-load row up to the number of seats in that row.
  
 ### 20: Create a pre-ride queue to place guests in before getting on the ride
  
 #### Description
  
-Currently, the animation takes a guest from the queue and places them in their seat. Normally, in real life, a guest would go from the queue to a staging spot before getting on the ride. This would be nice to have for timed rides and for rides that allow for double grouping. However, this is not a requirement for all rides, so it should be optional.
+Currently, the animation takes a guest from the queue and places them in their seat. Normally, in real life, a guest would go from the queue to a staging spot (pre-load) before getting on the ride. This would be nice to have for timed rides and for rides that allow for double grouping. However, this is not a requirement for all rides, so it should be implemented on Interval Batch Loader rides only, but we will add it for all ride types for now.
  
 #### Solution
  
@@ -215,4 +215,4 @@ To start the game the trainee will select the first gray guest group avatar to r
 
 If the vehicle has 4 rows of 4 seats, and the queue has 5 groups (2,4,2,6,2). The trainee selects the first group avatar and finds that there are 2 in the first group. He selects the both individuals in the revealed group and then selects the first row to start the animation of those avatars walking to the first row. He then selects the second group leader, which has moved to the front of the line, and finds that there are 4 in that group by seeing that number of avatars and the color of the group changing from gray to a different color. The trainee selects each avatar from the group and places them in the second pre-load row. The trainee then selects the third group leader and finds that there are 2 in that group by seeing that number of avatars and the color of the group changing from gray to a different color. The trainee selects each avatar from the group and places them in the first pre-load row and they walk to the row with the initial group of 2 avatars. The trainee then selects the fourth group leader and finds that there are 6 in that group by seeing that number of avatars and the color of the group changing from gray to a different color. The trainee chooses to reveal the fifth group to see how many people are in it. This reveals a group of 2. The trainee selects 4 individuals from the fourth group and chooses to place them in the third pre-load row. Then the trainee selects the other two from the the fourth group and places them in the fourth pre-load row. The trainee then selects the 2 avatars from the fifth group and places them in the fourth pre-load row with the other 2 already placed. The trainee then selects the send vehicle and all of the avatars move from the pre-load area to their seats and the vehicle animates up off the screen. The trainee then get's to fill another pre-load area with more avatars. 
 
-Not all seats need to be filled in order to send a vehicle. If the trainee wanted to, they could load from the back row first and then move to the front row. The trainee could also load from the front row first and then move to the back row. For 
+Not all seats need to be filled in order to send a vehicle. If the trainee wanted to, they could load from the back row first and then move to the front row. The trainee could also load from the front row first and then move to the back row or start in any row they wish. 
