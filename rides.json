@@ -33,7 +33,7 @@
     "active": true
   },
   {
-    "name": "Buzz Lightyear’s Space Ranger Spin",
+    "name": "Buzz Lightyear's Space Ranger Spin",
     "nameSlug": "buzz-lightyear-s-space-ranger-spin",
     "location": "ObjectId for Magic Kingdom", 
     "rideType": "Continuous Mover",
@@ -55,7 +55,7 @@
     "active": true
   },
   {
-    "name": "it’s a small world",
+    "name": "it's a small world",
     "nameSlug": "it-s-a-small-world",
     "location": "ObjectId for Magic Kingdom", 
     "rideType": "Interval Batch Loader",
@@ -110,7 +110,7 @@
     "active": true
   },
   {
-    "name": "Peter Pan’s Flight",
+    "name": "Peter Pan's Flight",
     "nameSlug": "peter-pan-s-flight",
     "location": "ObjectId for Magic Kingdom", 
     "rideType": "Continuous Mover",
@@ -165,7 +165,7 @@
     "active": true
   },
   {
-    "name": "Tiana’s Bayou Adventure",
+    "name": "Tiana's Bayou Adventure",
     "nameSlug": "tiana-s-bayou-adventure",
     "location": "ObjectId for Magic Kingdom", 
     "rideType": "Interval Batch Loader",
@@ -264,7 +264,7 @@
     "active": true
   },
   {
-    "name": "Remy’s Ratatouille Adventure",
+    "name": "Remy's Ratatouille Adventure",
     "nameSlug": "remy-s-ratatouille-adventure",
     "location": "ObjectId for Epcot", 
     "rideType": "Multiple Interval Batch Loader",
@@ -286,7 +286,7 @@
     "active": true
   },
   {
-    "name": "Soarin’ Wing",
+    "name": "Soarin' Wing",
     "nameSlug": "soarin-wing",
     "location": "ObjectId for Epcot", 
     "rideType": "Stop and Go Single Vehicle",
@@ -297,7 +297,7 @@
     "active": true
   },
   {
-    "name": "Soarin’ Middle",
+    "name": "Soarin' Middle",
     "nameSlug": "soarin-middle",
     "location": "ObjectId for Epcot", 
     "rideType": "Stop and Go Single Vehicle",
@@ -341,7 +341,7 @@
     "active": true
   },
   {
-    "name": "Mickey and Minnie’s Runaway Railway",
+    "name": "Mickey and Minnie's Runaway Railway",
     "nameSlug": "mickey-and-minnie-s-runaway-railway",
     "location": "ObjectId for Hollywood Studios", 
     "rideType": "Interval Batch Loader",
