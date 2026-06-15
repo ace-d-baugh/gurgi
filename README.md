@@ -103,6 +103,7 @@ Practice with **Expedition Everest**, **Avatar Flight of Passage**, **Kilimanjar
 ### Frontend
 - **React 18** with TypeScript
 - **Tailwind CSS** for styling
+- **3JS** for vehicle and guest design 
 - **Framer Motion** for smooth animations
 - **React Router** for navigation
 - **Vite** for lightning-fast builds
@@ -171,10 +172,46 @@ All admin actions require authentication and are protected by JWT tokens.
 
 ### 🎲 Realistic Guest Generation
 Groups are generated using real-world probability distributions:
-- **40%** of groups are 1-2 people
-- **38%** are 3-6 people  
-- **17%** are 7-15 people
-- **5%** are 16-40 people
+- **4.93%** party of 1
+- **41.74%** party of 2
+- **15.95%** party of 3
+- **29.92%** party of 4
+- **2.99%** party of 5
+- **1.99%** party of 6
+- **0.6%** party of 7
+- **0.8%** party of 8
+- **0.3%** party of 9
+- **0.2%** party of 10
+- **0.15%** party of 11
+- **0.11%** party of 12
+- **0.08%** party of 13
+- **0.06%** party of 14
+- **0.05%** party of 15
+- **0.04%** party of 16
+- **0.03%** party of 17
+- **0.02%** party of 18
+- **0.02%** party of 19
+- **0.01%** party of 20
+- **0.01%** party of 21
+- **0.01%** party of 22
+- **0.01%** party of 23
+- **0.002%** party of 24
+- **0.002%** party of 25
+- **0.002%** party of 26
+- **0.001%** party of 27
+- **0.001%** party of 28
+- **0.001%** party of 29
+- **0.001%** party of 30
+- **0.001%** party of 31
+- **0.001%** party of 32
+- **0.001%** party of 33
+- **0.001%** party of 34
+- **0.001%** party of 35
+- **0.001%** party of 36
+- **0.001%** party of 37
+- **0.001%** party of 38
+- **0.001%** party of 39
+- **0.001%** party of 40
 
 This mirrors actual Disney park demographics for authentic training.
 
