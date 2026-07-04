@@ -6,7 +6,8 @@ A browser-based training application that helps Disney theme park cast members m
  
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Node Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-6.0%2B-green)](https://www.mongodb.com/)
+[![React](https://img.shields.io/badge/React-18-61dafb)](https://react.dev/)
+[![Three.js](https://img.shields.io/badge/Three.js-r169-049EF4)](https://threejs.org/)
  
 ---
  
@@ -28,7 +29,6 @@ Training new theme park ride attendants to group guests efficiently is challengi
 ### Prerequisites
  
 - Node.js 18+ and npm
-- Supabase 13+ 
 - A modern browser (Chrome, Safari, Firefox, or Edge)
 ### Installation
  
@@ -37,21 +37,18 @@ Training new theme park ride attendants to group guests efficiently is challengi
 git clone https://github.com/your-org/gurgi.git
 cd gurgi
  
-# Install dependencies for both client and server
-npm run install:all
+# Install dependencies
+npm install
  
-# Set up environment variables
-cp .env.example .env
-# Edit .env with your Supabase URI and other settings
- 
-# Seed the database with ride data
-npm run seed
- 
-# Start development servers (client + server)
+# Start the dev server
 npm run dev
 ```
  
 Visit `http://localhost:5173` and you're ready to train!
+ 
+G.U.R.G.I. v1 is a fully client-side app — no database or environment
+variables required. `npm run build` produces a static bundle in `dist/`
+that can be hosted anywhere.
  
 ---
  
@@ -72,7 +69,7 @@ Visit `http://localhost:5173` and you're ready to train!
 5. **Repeat** - Complete multiple vehicles to finish your training round
 ### Visual Learning
  
-Guests are rendered as an Unreal Engine human figure, starting **gray**. When a trainee taps the first guest in a group, the entire party changes to a **random color**, revealing how many guests are in that party. A selected group that the trainee is actively placing is visually distinguished (e.g., highlighted outline). If you place too many guests in a row, the row **flashes red** and **shakes**—instant feedback that guides better decisions.
+Guests are rendered as 3D humanoid figures (Three.js), starting **gray**. When a trainee taps the first guest in a group, the entire party changes to a **random color**, revealing how many guests are in that party. A selected group that the trainee is actively placing is visually distinguished (e.g., highlighted outline). If you place too many guests in a row, the row **flashes red** and **shakes**—instant feedback that guides better decisions.
  
 ---
  
@@ -96,31 +93,26 @@ All attractions are fully configured with accurate vehicle layouts and operation
  
 ## 🛠️ Tech Stack
  
-### Frontend (FIX THIS SECTION AS NEEDED)
+### Frontend
 - **React 18** with TypeScript
-- **Tailwind CSS** for styling
-- **Unreal Engine** for 3D guest and vehicle rendering
-- **Framer Motion** for smooth animations
-- **React Router** for navigation
+- **Tailwind CSS 4** for styling
+- **Three.js via react-three-fiber** for the 3D guests, queues, and ride vehicles
+- **Framer Motion** for UI animations
+- **Zustand** for game state
 - **Vite** for lightning-fast builds
 ### Backend
-- **Node.js 18** with Express
-- **TypeScript** for type safety
-- **Supabase** with Postgres
-- **JWT** authentication
-- **bcrypt** for password security
+- None in v1 — the game runs entirely in the browser as a static bundle.
+- **Supabase** planned for a future phase (ride preset library, trainer accounts, analytics).
 ### Deployment
-- **Nginx** reverse proxy
-- **PM2** process management
-- **Let's Encrypt** SSL certificates
+- Any static host (Nginx, Netlify, Cloudflare Pages, S3, …)
 - Deployed at **gurgi.digitalelegance.com**
 ---
  
 ## 🎨 Key Features
  
-### 🧍 Unreal Engine Guest Rendering
+### 🧍 3D Guest Rendering
  
-Guests are rendered as nondescript humanoid using Unreal Engine. Their default state is **gray**. When a trainee taps the lead guest in a queue group, that entire party changes to a **random color**, revealing group size. The trainee can then select that group to begin placing them in the vehicle loading zone, or tap another group to reveal its size first. Seated guests animate into their vehicle positions.
+Guests are rendered as nondescript low-poly humanoids in a real-time 3D scene (Three.js / react-three-fiber). Their default state is **gray**. When a trainee taps the lead guest in a queue group, that entire party changes to a **random color**, revealing group size. The trainee can then select that group to begin placing them in the vehicle loading zone, or tap another group to reveal its size first. Seated guests animate into their vehicle positions.
  
 ### 🎲 Procedurally Balanced Guest Queue
  

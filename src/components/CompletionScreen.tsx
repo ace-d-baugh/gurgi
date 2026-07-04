@@ -18,16 +18,18 @@ function fmt(seconds: number) {
 
 export function CompletionScreen() {
   const stats = useGame((s) => s.stats)
+  const roundStartedAt = useGame((s) => s.roundStartedAt)
   const startGame = useGame((s) => s.startGame)
   const backToLanding = useGame((s) => s.backToLanding)
 
   const totalSeats = stats.reduce((a, v) => a + v.seats, 0)
   const totalFilled = stats.reduce((a, v) => a + v.filled, 0)
-  const score = totalSeats - totalFilled
-  const totalTime = stats.reduce((a, v) => a + v.seconds, 0)
+  const timed = stats.filter((v) => v.seconds > 0)
+  const totalTime = timed.length > 0 ? timed.reduce((a, v) => a + v.seconds, 0) : (Date.now() - roundStartedAt) / 1000
   const avgTime = stats.length > 0 ? totalTime / stats.length : 0
   const efficiency = totalSeats > 0 ? (totalFilled / totalSeats) * 100 : 0
   const g = grade(efficiency)
+  const perfect = totalFilled === totalSeats && totalSeats > 0
 
   return (
     <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
@@ -42,15 +44,19 @@ export function CompletionScreen() {
           transition={{ type: 'spring', delay: 0.15 }}
           className="text-5xl"
         >
-          {score === 0 ? '🏆' : '🎉'}
+          {perfect ? '🏆' : '🎉'}
         </motion.div>
         <h2 className="mt-2 text-2xl font-black text-ink">Training Round Complete!</h2>
 
         <div className="mx-auto mt-4 flex max-w-xs items-center justify-center gap-4">
           <div className="rounded-2xl bg-gradient-to-br from-fantasy to-magic px-6 py-3 text-white shadow-lg">
-            <div className="text-xs font-bold uppercase tracking-widest text-white/70">Score ⛳</div>
-            <div className="text-4xl font-black tabular-nums">{score}</div>
-            <div className="text-[10px] font-semibold text-white/70">empty seats · lower is better</div>
+            <div className="text-xs font-bold uppercase tracking-widest text-white/70">Score 🎯</div>
+            <div className="whitespace-nowrap text-3xl font-black tabular-nums">
+              {totalFilled}
+              <span className="text-lg font-bold text-white/70"> of </span>
+              {totalSeats}
+            </div>
+            <div className="text-[10px] font-semibold text-white/70">seats filled of possible</div>
           </div>
           <div className="rounded-2xl bg-slate-100 px-6 py-3 shadow-inner">
             <div className="text-xs font-bold uppercase tracking-widest text-slate-400">Grade</div>

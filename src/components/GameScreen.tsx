@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useGame } from '../store'
-import { RIDE_TYPE_INFO } from '../types'
+import { RIDE_TYPE_INFO, totalSeats } from '../types'
 import { GameScene } from '../three/GameScene'
 import { CompletionScreen } from './CompletionScreen'
 
@@ -79,28 +79,29 @@ function HelpOverlay({ onClose }: { onClose: () => void }) {
         <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm text-slate-700">
           <li>
             <b>Tap a gray group</b> in the queue — the whole party lights up in one color and shows
-            its size badge.
+            its size badge. The host in the blue uniform marks the front of the line.
           </li>
           <li>
-            <b>Tap guests</b> to select them (white ring). You can only select from one party at a
-            time, up to the row capacity.
+            <b>Tap guests</b> to select them (white ring), then <b>tap a numbered load row</b> to
+            walk them over. Rows fill left to right, top to bottom. Too many? It flashes red.
           </li>
           <li>
-            <b>Tap a load row</b> (the circles, or the vehicle row itself) to walk them over. Too
-            many for the row? It flashes red.
+            Use <b>Call for #</b> to pull a party of an exact size to the front. Calling for 1
+            grabs the next <b>single rider</b> (black, side line) when that line is open.
           </li>
           <li>
-            Use <b>Call for #</b> to pull a party of an exact size to the front — great for filling
-            odd seats. <b>Single riders</b> (black, side line) plug single gaps.
+            A guest may <b>request a row</b> (🙏 badge) — honor it, or defer the group to the
+            waiting area (3 groups max) with the Defer button.
           </li>
           <li>
-            Hit <b>Send It!</b> to dispatch. In timed mode the vehicle leaves when the clock hits
-            zero, ready or not!
+            Dispatch when ready. On spinning and theater rides you can <b>stage the next batch</b>{' '}
+            on the purple circles while the ride runs. Continuous movers board automatically when
+            an empty vehicle lines up with a staged spot!
           </li>
         </ol>
         <p className="mt-3 rounded-xl bg-slate-100 p-3 text-sm text-slate-700">
-          ⛳ <b>Scoring is like golf:</b> your score is the number of <b>empty seats</b> you
-          dispatch. A perfect round is <b>0</b>. Fill every seat!
+          🎯 <b>Scoring:</b> seats filled out of seats possible — 19 of 20 after one 20-seat
+          vehicle, out of 40 once the next arrives. Fill every seat!
         </p>
         <button
           onClick={onClose}
@@ -121,25 +122,64 @@ export function GameScreen() {
   const vehicleNumber = useGame((s) => s.vehicleNumber)
   const stats = useGame((s) => s.stats)
   const guests = useGame((s) => s.guests)
+  const groups = useGame((s) => s.groups)
   const selection = useGame((s) => s.selection)
   const sendVehicle = useGame((s) => s.sendVehicle)
   const callFor = useGame((s) => s.callFor)
+  const deferGroup = useGame((s) => s.deferGroup)
   const backToLanding = useGame((s) => s.backToLanding)
   const [helpOpen, setHelpOpen] = useState(false)
 
   const info = RIDE_TYPE_INFO[config.rideType]
-  const emptySoFar = stats.reduce((acc, v) => acc + (v.seats - v.filled), 0)
-  const anyLoaded = Object.values(guests).some((g) => g.state === 'loaded' || g.state === 'seated')
+  const continuous = config.rideType === 'continuous'
+  const cycleRide =
+    config.rideType === 'carousel' || config.rideType === 'spinner' || config.rideType === 'theater'
+
+  // 🎯 score: filled of possible (dispatched vehicles + the one being loaded)
+  const filledPast = stats.reduce((a, v) => a + v.filled, 0)
+  const seatsPast = stats.reduce((a, v) => a + v.seats, 0)
+  const loadedNow = continuous
+    ? 0
+    : Object.values(guests).filter((g) => (g.state === 'loaded' || g.state === 'seated') && !g.staged)
+        .length
+  const currentSeats = continuous
+    ? stats.length < options.vehiclesToLoad
+      ? totalSeats(config)
+      : 0
+    : phase === 'loading' || phase === 'arriving'
+      ? totalSeats(config)
+      : 0
+  const score = `${filledPast + loadedNow} / ${seatsPast + currentSeats}`
+
+  const anyLoaded = loadedNow > 0
   const callSizes = Array.from({ length: Math.min(9, options.maxGroupSize) }, (_, i) => i + 1)
+
+  const selGroup =
+    selection.length > 0 && !guests[selection[0]]?.single
+      ? groups.find((g) => g.id === guests[selection[0]]?.groupId)
+      : undefined
+
+  const sendLabel =
+    config.rideType === 'coaster'
+      ? 'Send It! 🚀'
+      : config.rideType === 'theater'
+        ? 'Start Show! 🎭'
+        : 'Start Ride! 🎡'
+
+  const vehicleShown = continuous ? Math.min(stats.length + 1, options.vehiclesToLoad) : Math.min(vehicleNumber, options.vehiclesToLoad)
 
   const phaseLabel =
     phase === 'dispatching'
       ? '🚀 Dispatching…'
-      : phase === 'arriving'
-        ? config.rideType === 'stopgo'
-          ? '🎢 Ride running… vehicle returning'
-          : '🛬 Vehicle arriving…'
-        : null
+      : phase === 'riding'
+        ? config.rideType === 'theater'
+          ? '🎭 Show in progress — stage the next audience!'
+          : '🎡 Ride running — stage the next group!'
+        : phase === 'unloading'
+          ? '🚪 Guests unloading…'
+          : phase === 'arriving' && !continuous
+            ? '🛬 Vehicle arriving…'
+            : null
 
   return (
     <div className="relative h-full w-full overflow-hidden bg-[#bfe0f5]">
@@ -152,14 +192,16 @@ export function GameScreen() {
           <span className="hidden text-sm font-bold text-ink sm:inline">{info.label}</span>
         </div>
         <div className="pointer-events-auto flex items-center gap-2">
-          <TimerDisplay />
-          <button
-            onClick={() => sendVehicle(false)}
-            disabled={phase !== 'loading' || !anyLoaded}
-            className="rounded-xl bg-magic px-4 py-1.5 text-base font-black tracking-wide text-white shadow-lg transition-transform hover:scale-105 active:scale-95 disabled:opacity-40"
-          >
-            Send It! 🚀
-          </button>
+          {!continuous && <TimerDisplay />}
+          {!continuous && (
+            <button
+              onClick={() => sendVehicle(false)}
+              disabled={phase !== 'loading' || !anyLoaded}
+              className="rounded-xl bg-magic px-4 py-1.5 text-base font-black tracking-wide text-white shadow-lg transition-transform hover:scale-105 active:scale-95 disabled:opacity-40"
+            >
+              {sendLabel}
+            </button>
+          )}
         </div>
         <div className="pointer-events-auto flex items-center gap-2">
           <button
@@ -186,7 +228,7 @@ export function GameScreen() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 rounded-full bg-ink/80 px-6 py-2 text-base font-bold text-white shadow-xl"
+            className="pointer-events-none absolute left-1/2 top-14 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-ink/80 px-6 py-2 text-sm font-bold text-white shadow-xl sm:text-base"
           >
             {phaseLabel}
           </motion.div>
@@ -206,8 +248,7 @@ export function GameScreen() {
               <button
                 key={n}
                 onClick={() => callFor(n)}
-                disabled={phase !== 'loading'}
-                className="h-8 w-8 rounded-lg bg-fantasy text-sm font-black text-white transition-transform hover:scale-110 active:scale-90 disabled:opacity-40"
+                className="h-8 w-8 rounded-lg bg-fantasy text-sm font-black text-white transition-transform hover:scale-110 active:scale-90"
               >
                 {n}
               </button>
@@ -216,23 +257,32 @@ export function GameScreen() {
         ) : (
           <div />
         )}
-        <div className="pointer-events-auto flex items-center gap-2">
+        <div className="pointer-events-auto flex flex-wrap items-center gap-2">
+          {options.rowRequests && selGroup && (
+            <button
+              onClick={deferGroup}
+              className="rounded-xl bg-[#F39C12] px-3 py-1.5 text-sm font-black text-white shadow transition-transform hover:scale-105 active:scale-95"
+            >
+              Defer to waiting area
+            </button>
+          )}
           {selection.length > 0 && (
             <span className="rounded-xl bg-white/90 px-3 py-1.5 text-sm font-bold text-ink shadow">
               ✔ {selection.length} selected
             </span>
           )}
-          <span className="rounded-xl bg-white/90 px-3 py-1.5 text-sm font-bold text-ink shadow">
-            ⛳ {emptySoFar}
+          <span className="rounded-xl bg-white/90 px-3 py-1.5 text-sm font-bold text-ink shadow tabular-nums">
+            🎯 {score}
           </span>
           <span className="rounded-xl bg-white/90 px-3 py-1.5 text-sm font-bold text-ink shadow">
-            Vehicle {Math.min(vehicleNumber, options.vehiclesToLoad)} of {options.vehiclesToLoad}
+            Vehicle {vehicleShown} of {options.vehiclesToLoad}
           </span>
         </div>
       </div>
 
       {helpOpen && <HelpOverlay onClose={() => setHelpOpen(false)} />}
       {screen === 'complete' && <CompletionScreen />}
+      {cycleRide && null}
     </div>
   )
 }
